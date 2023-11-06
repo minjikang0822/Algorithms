@@ -47,6 +47,9 @@ class maxHeap:
         self.printHeap()
 
     def delete(self, item):
+        if item not in self.heap:
+            print(f"***** {item} NOT IN THE HEAP ******")
+            return
         # find the index of item to remove
         item_idx = self.heap.index(item)
         # remove the root node and place the last node at the root node
@@ -99,23 +102,22 @@ def main():
     maxheap.insert(2)
     maxheap.insert(3)
     maxheap.insert(4)
+
+    maxheap.delete(2)
+
     maxheap.insert(9)
     maxheap.insert(7)
     maxheap.insert(8)
+
+    maxheap.delete(100)
+    maxheap.delete(9)
+
     maxheap.insert(0)
     maxheap.insert(5)
     maxheap.insert(6)
 
-    maxheap.insert(7)
-    maxheap.insert(8)
-    maxheap.insert(0)
-    maxheap.insert(5)
-    maxheap.insert(6)
-    maxheap.insert(7)
-    maxheap.insert(8)
-    maxheap.insert(0)
-    maxheap.insert(5)
     maxheap.delete(7)
+    maxheap.delete(3)
 
 
 if __name__ == "__main__":
