@@ -47,6 +47,11 @@ class Heap:
             end = end + (2 ** from_top)
         print("--------------------------")
 
+    def peek(self):
+        root_node = self.heap[0]
+        print("Current root node is ", root_node)
+        return root_node
+
     def insert(self, item):
         print("overwrite insert function on its child class")
 
@@ -199,6 +204,7 @@ def testMinHeap():
 
     min_heap.delete(7)
     min_heap.delete(3)
+    min_heap.peek()
 
 
 if __name__ == "__main__":
