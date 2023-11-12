@@ -67,6 +67,7 @@ class BinarySearchTree:
                 # case 3: no child
                 else:
                     # 부모찾아서 none해야함
+                    # search 안쓰고..
                     pass
 
     def printTree(self):
