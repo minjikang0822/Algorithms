@@ -12,17 +12,34 @@ class BinarySearchTree:
 
     def preOrderTraverse(self):
         # parent -> left -> right
-        print(self.node)
+        print(self.node, end=" ")
         if self.left is not None:
             self.left.preOrderTraverse()
         if self.right is not None:
             self.right.preOrderTraverse()
 
+    def inOrderTraverse(self):
+        if self.left is not None:
+            self.left.inOrderTraverse()
+        print(self.node, end=" ")
+        if self.right is not None:
+            self.right.inOrderTraverse()
+
+    def postOrderTraverse(self):
+        if self.left is not None:
+            self.left.postOrderTraverse()
+        if self.right is not None:
+            self.right.postOrderTraverse()
+        print(self.node, end=" ")
+
 
 def main():
     bst = BinarySearchTree('A', BinarySearchTree('B', 'D', 'E'), BinarySearchTree('C', 'F', 'G'))
     bst.preOrderTraverse()
-    print("---")
+    print()
+    bst.inOrderTraverse()
+    print()
+    bst.postOrderTraverse()
 
 
 if __name__ == "__main__":

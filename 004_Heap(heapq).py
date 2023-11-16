@@ -5,9 +5,9 @@ def min_heapsort(iterable):
     h = []
     result = []
     for value in iterable:
-        heapq.heappush(h, -value)
+        heapq.heappush(h, value)
     for i in range(len(h)):
-        result.append(-heapq.heappop(h))
+        result.append(heapq.heappop(h))
     return result
 
 
@@ -27,9 +27,7 @@ res1 = min_heapsort(arr)
 res2 = max_heapsort(arr)
 
 print("----- min heap -----")
-for item in res1:
-    print(item)
+print(" ".join(map(str, res1)))
 
 print("----- max heap -----")
-for item in res2:
-    print(item)
+print(" ".join(map(str, res2)))
