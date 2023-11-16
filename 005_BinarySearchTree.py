@@ -125,6 +125,7 @@ def main():
     # bst.delete(24)
     # bst.printTree2()
     print(bst.left.right.right.node)
+    # PRINTTREE FUNCTION NEEDS TO BE EDITED
 
 
 if __name__ == "__main__":
