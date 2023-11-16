@@ -72,19 +72,28 @@ class BinarySearchTree:
 
     def printTree(self):
         # 수정 필요
-        print(self.node)
-        print(self.left.node, ' ', self.right.node)
+        # print(self.node)
+        if self.left is None and self.right is not None:
+            print("None  ", self.right.node)
+            self.right.printTree()
+        elif self.right is None and self.left is not None:
+            print(self.left.node, "  None")
+            self.left.printTree()
+        elif self.left is not None and self.right is not None:
+            print(self.left.node, "  ", self.right.node)
+            self.left.printTree()
+            self.right.printTree()
 
 
 def main():
     bst = BinarySearchTree(15)
-    to_insert = [8, 24, 5, 13, 19, 28, 2, 6, 12, 25]
+    to_insert = [8, 24, 5, 11, 19, 28, 2, 6, 13, 25, 12]
     for item in to_insert:
         bst.insert(item)
-    bst.delete(11)
-    bst.delete(24)
+    # bst.delete(11)
+    # bst.delete(24)
     bst.printTree()
-    print(bst.left.right.left.node)
+    # print(bst.left.right.left.node)
 
 
 if __name__ == "__main__":
