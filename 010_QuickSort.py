@@ -1,67 +1,32 @@
 def quickSort_A(target):
     if len(target) <= 1:
         return target
-    pivot_idx = 0
-    pivot = target[pivot_idx]
-
-    left = 1
-    right = len(target)-1
-    while left < right:
-        for i in range(left, len(target), 1):
-            if target[i] > pivot:
-                left = i
-                break
-        for j in range(right, 0, -1):
-            if target[j] < pivot:
-                right = j
-                break
-        if left < right and target[left] > target[right]:
-            target[left], target[right] = target[right], target[left]
+    pivot = target[0]
+    left = []
+    right = []
+    for item in target[1:]:
+        if item <= pivot:
+            left.append(item)
         else:
-            break
+            right.append(item)
 
-        if left+1 >= right-1:
-            break
-        else:
-            left += 1
-            right -= 1
-    if target[right] < pivot:
-        target[pivot_idx], target[right] = target[right], target[pivot_idx]
-        pivot_idx = right
-
-    return quickSort_A(target[:pivot_idx]) + [pivot] + quickSort_A(target[pivot_idx+1:])
+    return quickSort_A(left) + [pivot] + quickSort_A(right)
 
 
 def quickSort_D(target):
-    print("target: ", target)
     if len(target) <= 1:
         return target
-    pivot_idx = 0
-    pivot = target[pivot_idx]
 
-    left = 1
-    right = len(target)-1
-    while left < right:
-        for i in range(left, len(target), 1):
-            if target[i] < pivot:
-                left = i
-                break
-        for j in range(right, 0, -1):
-            if target[j] > pivot:
-                right = j
-                break
-        if left <= right and target[left] < pivot < target[right]:
-            target[left], target[right] = target[right], target[left]
-        left += 1
-        right -= 1
-    if target[right] > pivot:
-        target[pivot_idx], target[right] = target[right], target[pivot_idx]
-        pivot_idx = right
-    print("pivot_idx: ", pivot_idx, " pivot: ", pivot)
-    print("new: ", target)
-    print("left: ", target[:pivot_idx])
-    print("right: ", target[pivot_idx+1:])
-    return quickSort_D(target[:pivot_idx]) + [pivot] + quickSort_D(target[pivot_idx+1:])
+    pivot = target[0]
+    left = []
+    right = []
+    for item in target[1:]:
+        if item >= pivot:
+            left.append(item)
+        else:
+            right.append(item)
+
+    return quickSort_D(left) + [pivot] + quickSort_D(right)
 
 
 def main():
