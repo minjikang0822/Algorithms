@@ -21,5 +21,6 @@ def main():
     print(countingSort(test, True))
     # [9, 9, 8, 7, 6, 5, 5, 4, 3, 2, 2, 1, 1, 0, 0]
 
+
 if __name__ == "__main__":
     main()
