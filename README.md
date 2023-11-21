@@ -1,4 +1,4 @@
-![cylinder](https://capsule-render.vercel.app/api?type=cylinder&color=auto&text=Algorithms&fontAlignY=45&fontSize=40&height=170&animation=blinking&desc=with%20Python&descAlignY=70)
+![cylinder](https://capsule-render.vercel.app/api?type=cylinder&color=auto&text=Algorithms&fontAlignY=45&fontSize=40&height=170&animation=blinking&desc=in%20Python&descAlignY=70)
 
 Implemented Useful Algorithms in Python for Competitive Programming
 
@@ -50,11 +50,11 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟡[Counting Sort](https://github.com/minjikang0822/Algorithms/blob/master/012_CountingSort.py)
 </br>
-🔴[Radix Sort]()
+🟢[Radix Sort]()
 </br>
 🔴[Shell Sort]()
 </br>
-🔴[Bubble Sort]()
+🟢[Bubble Sort]()
 </br>
 🔴[Bucket Sort]()
 </br>
