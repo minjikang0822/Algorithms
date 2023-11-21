@@ -1,19 +1,13 @@
 # Ascending
 def selectionSort(target, is_ascending=True):
-    if is_ascending:
-        for i in range(len(target)):
-            min_idx = i
-            for j in range(i+1, len(target), 1):
-                if target[min_idx] > target[j]:
-                    min_idx = j
-            target[i], target[min_idx] = target[min_idx], target[i]
-    else:
-        for i in range(len(target)):
-            max_idx = i
-            for j in range(i + 1, len(target), 1):
-                if target[max_idx] < target[j]:
-                    max_idx = j
-            target[i], target[max_idx] = target[max_idx], target[i]
+    for i in range(len(target)):
+        min_idx = i
+        for j in range(i+1, len(target), 1):
+            if target[min_idx] > target[j]:
+                min_idx = j
+        target[i], target[min_idx] = target[min_idx], target[i]
+    if not is_ascending:
+        target = target[::-1]
     return target
 
 
