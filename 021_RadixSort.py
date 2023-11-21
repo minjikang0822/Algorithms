@@ -1,7 +1,7 @@
 from collections import deque
 
 
-def radixSort(target, is_ascending=True):
+def radixSort(target, is_descending=False):
     digits = len(str(max(target)))
     buckets = [deque() for _ in range(10)]
     neg_list, pos_list = [], []
@@ -19,7 +19,7 @@ def radixSort(target, is_ascending=True):
                 digit_i = int(item[i])
                 buckets[digit_i].append(item)
             j = 0
-            for bucket in buckets if is_ascending else buckets[::-1]:
+            for bucket in buckets:
                 # while there is an element in deque bucket
                 while bucket:
                     temp_list[j] = bucket.popleft()
@@ -27,9 +27,9 @@ def radixSort(target, is_ascending=True):
 
     neg_list = list(map(lambda x: -1*int(x), neg_list))[::-1]
     pos_list = list(map(int, pos_list))
-
-    answer = neg_list + pos_list if is_ascending else pos_list + neg_list
-
+    answer = neg_list + pos_list
+    if is_descending:
+        answer = answer[::-1]
     return answer
 
 
@@ -38,7 +38,7 @@ def main():
     print("Ascending Sorting -----")
     print(radixSort(test))
     print("Descending Sorting -----")
-    print(radixSort(test, False))
+    print(radixSort(test, True))
 
 
 if __name__ == "__main__":
