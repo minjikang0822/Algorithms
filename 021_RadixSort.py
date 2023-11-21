@@ -35,7 +35,9 @@ def radixSort(target, is_ascending=True):
 
 def main():
     test = [39, 30, -30, 94, 200, -294, 2, 1, 0, -1, 85, 62, -11, -27, 395]
+    print("Ascending Sorting -----")
     print(radixSort(test))
+    print("Descending Sorting -----")
     print(radixSort(test, False))
 
 
