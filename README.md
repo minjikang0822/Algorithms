@@ -7,15 +7,15 @@ Implemented Useful Algorithms in Python for Competitive Programming
 🟢: Done
 
 # 🗂️Index
-1. [Data Structure](🧱Data-Structure)
-2. [Tree](🌳Tree)
-3. [Sorting Algorithm](🧩Sorting-Algorithm)
-4. [Searching Algorithm](🔎Searching-Algorithm)
-5. [Algorithm for Finding The Shortest Paths](🌌Algorithm-for-Finding-The-Shortest-Paths)
+1. [Data Structure](#Data-Structure)
+2. [Tree](#Tree)
+3. [Sorting Algorithm](#Sorting-Algorithm)
+4. [Searching Algorithm](#Searching-Algorithm)
+5. [Algorithm for Finding The Shortest Paths](#Algorithm-for-Finding-The-Shortest-Paths)
 
 
 
-## 🧱Data Structure
+## Data Structure
 🟢[Stack](https://github.com/minjikang0822/Algorithms/blob/master/001_Stack.py)
 </br>
 🟢[Queue](https://github.com/minjikang0822/Algorithms/blob/master/002_Queue.py)
@@ -24,22 +24,22 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Heap(heapq)](https://github.com/minjikang0822/Algorithms/blob/master/004_Heap(heapq).py)
 </br>
-🔴[Union-Find]()
+🔴[Union-Find](https://github.com/minjikang0822/Algorithms/blob/main/018_UnionFind.py)
 
 
 
-## 🌳Tree
+## Tree
 🟢[Binary Search Tree](https://github.com/minjikang0822/Algorithms/blob/master/005_BinarySearchTree.py)
 </br>
 🟢[Tree Traversal](https://github.com/minjikang0822/Algorithms/blob/master/006_TreeTraversal.py)
 </br>
 🟢[Fenwick Tree (Binary Indexed Tree)](https://github.com/minjikang0822/Algorithms/blob/master/007_FenwickTree.py)
 </br>
-🔴[Kruskal's Algorithms]()
+🔴[Kruskal's Algorithms](https://github.com/minjikang0822/Algorithms/blob/main/019_Kruskals.py)
 
 
 
-## 🧩Sorting Algorithm
+## Sorting Algorithm
 🟢[Selection Sort](https://github.com/minjikang0822/Algorithms/blob/master/008_SelectionSort.py)
 </br>
 🟢[Insertion Sort](https://github.com/minjikang0822/Algorithms/blob/master/009_InsertionSort.py)
@@ -50,11 +50,11 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Counting Sort](https://github.com/minjikang0822/Algorithms/blob/master/012_CountingSort.py)
 </br>
-🟢[Radix Sort]()
+🟢[Radix Sort](https://github.com/minjikang0822/Algorithms/blob/main/021_RadixSort.py)
 </br>
 🔴[Shell Sort]()
 </br>
-🟢[Bubble Sort]()
+🟢[Bubble Sort](https://github.com/minjikang0822/Algorithms/blob/main/022_BubbleSort.py)
 </br>
 🔴[Bucket Sort]()
 </br>
@@ -62,18 +62,18 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🔴[Pigeonhole Sort]()
 </br>
-🔴[Topological Sort]()
+🔴[Topological Sort](https://github.com/minjikang0822/Algorithms/blob/main/020_TopologicalSort.py)
 
 
 
-## 🔎Searching Algorithm
+## Searching Algorithm
 🔴[Linear Search]()
 </br>
 🔴[Binary Search]()
 </br>
-🟢[Depth-First Search (DFS)]()
+🟢[Depth-First Search (DFS)](https://github.com/minjikang0822/Algorithms/blob/main/013_DepthFirstSearch(DFS).py)
 </br>
-🟢[Breadth-First Search (BFS)]()
+🟢[Breadth-First Search (BFS)](https://github.com/minjikang0822/Algorithms/blob/main/014_BreadthFirstSearch(BFS).py)
 </br>
 🔴[Ternary Search]()
 </br>
@@ -89,9 +89,9 @@ Implemented Useful Algorithms in Python for Competitive Programming
 
 
 
-## 🌌Algorithm for Finding The Shortest Paths
-🟢[Dijkstra's Algorithm]()
+## Algorithm for Finding The Shortest Paths
+🟢[Dijkstra's Algorithm](https://github.com/minjikang0822/Algorithms/blob/main/015_Dijkstras.py)
 </br>
-🟡[Floyd–Warshall Algorithm]()
+🟡[Floyd–Warshall Algorithm](https://github.com/minjikang0822/Algorithms/blob/main/016_FloydWarshall.py)
 </br>
-🟡[Bellman–Ford Algorithm]()
+🟡[Bellman–Ford Algorithm](https://github.com/minjikang0822/Algorithms/blob/main/017_BellmanFord.py)
