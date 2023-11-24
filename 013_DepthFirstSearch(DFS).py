@@ -49,7 +49,7 @@ def main():
     dfs_withRecursion(test_graph, 1)
     print("\n----- without Recursion")
     dfs_withoutRecursion(test_graph, 1)
-    # 1 2 7 6 8 3 4 5 hello
+    # 1 2 7 6 8 3 4 5
 
 
 if __name__ == "__main__":
