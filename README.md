@@ -48,7 +48,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Quick Sort (simple version)](https://github.com/minjikang0822/Algorithms/blob/master/011_QuickSort(simple).py)
 </br>
-🟡[Counting Sort](https://github.com/minjikang0822/Algorithms/blob/master/012_CountingSort.py)
+🟢[Counting Sort](https://github.com/minjikang0822/Algorithms/blob/master/012_CountingSort.py)
 </br>
 🟢[Radix Sort]()
 </br>
@@ -71,9 +71,9 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🔴[Binary Search]()
 </br>
-🔴[Depth-First Search (DFS)]()
+🟢[Depth-First Search (DFS)]()
 </br>
-🔴[Breadth-First Search (BFS)]()
+🟢[Breadth-First Search (BFS)]()
 </br>
 🔴[Ternary Search]()
 </br>
@@ -90,8 +90,8 @@ Implemented Useful Algorithms in Python for Competitive Programming
 
 
 ## 🌌Algorithm for Finding The Shortest Paths
-🔴[Dijkstra's Algorithm]()
+🟢[Dijkstra's Algorithm]()
 </br>
-🔴[Floyd–Warshall Algorithm]()
+🟡[Floyd–Warshall Algorithm]()
 </br>
-🔴[Bellman–Ford Algorithm]()
+🟡[Bellman–Ford Algorithm]()
