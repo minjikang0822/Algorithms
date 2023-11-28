@@ -92,6 +92,6 @@ Implemented Useful Algorithms in Python for Competitive Programming
 ## Algorithm for Finding The Shortest Paths
 🟢[Dijkstra's Algorithm](https://github.com/minjikang0822/Algorithms/blob/main/015_Dijkstras.py)
 </br>
-🟡[Floyd–Warshall Algorithm](https://github.com/minjikang0822/Algorithms/blob/main/016_FloydWarshall.py)
+🟢[Floyd–Warshall Algorithm](https://github.com/minjikang0822/Algorithms/blob/main/016_FloydWarshall.py)
 </br>
 🟡[Bellman–Ford Algorithm](https://github.com/minjikang0822/Algorithms/blob/main/017_BellmanFord.py)
