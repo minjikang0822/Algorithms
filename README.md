@@ -54,7 +54,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Bubble Sort](https://github.com/minjikang0822/Algorithms/blob/main/022_BubbleSort.py)
 </br>
-🟡[Bucket Sort](https://github.com/minjikang0822/Algorithms/blob/main/025_BucketSort.py)
+🟢[Bucket Sort](https://github.com/minjikang0822/Algorithms/blob/main/025_BucketSort.py)
 </br>
 🔴[External Sort]()
 </br>
