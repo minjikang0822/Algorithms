@@ -56,9 +56,13 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Bubble Sort](https://github.com/minjikang0822/Algorithms/blob/main/022_BubbleSort.py)
 </br>
-🔴[Bucket Sort]()
+🟡[Bucket Sort](https://github.com/minjikang0822/Algorithms/blob/main/025_BucketSort.py)
 </br>
 🔴[External Sort]()
+</br>
+🟢[Merge Sort](https://github.com/minjikang0822/Algorithms/blob/main/023_MergeSort.py)
+</br>
+🟢[Shell Sort](https://github.com/minjikang0822/Algorithms/blob/main/024_ShellSort.py)
 </br>
 🔴[Pigeonhole Sort]()
 </br>
@@ -67,7 +71,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 
 
 ## Searching Algorithm
-🔴[Linear Search]()
+🟢[Linear Search](https://github.com/minjikang0822/Algorithms/blob/main/026_LinearSearch.py)
 </br>
 🔴[Binary Search]()
 </br>
