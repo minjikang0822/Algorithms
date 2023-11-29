@@ -52,8 +52,6 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Radix Sort](https://github.com/minjikang0822/Algorithms/blob/main/021_RadixSort.py)
 </br>
-🔴[Shell Sort]()
-</br>
 🟢[Bubble Sort](https://github.com/minjikang0822/Algorithms/blob/main/022_BubbleSort.py)
 </br>
 🟡[Bucket Sort](https://github.com/minjikang0822/Algorithms/blob/main/025_BucketSort.py)
