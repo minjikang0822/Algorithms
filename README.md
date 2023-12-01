@@ -24,7 +24,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Heap(heapq)](https://github.com/minjikang0822/Algorithms/blob/master/004_Heap(heapq).py)
 </br>
-🔴[Union-Find](https://github.com/minjikang0822/Algorithms/blob/main/018_UnionFind.py)
+🟡[Union-Find](https://github.com/minjikang0822/Algorithms/blob/main/018_UnionFind.py)
 
 
 
@@ -56,7 +56,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Bucket Sort](https://github.com/minjikang0822/Algorithms/blob/main/025_BucketSort.py)
 </br>
-🔴[External Sort]()
+🟡[External Sort]()
 </br>
 🟢[Merge Sort](https://github.com/minjikang0822/Algorithms/blob/main/023_MergeSort.py)
 </br>
