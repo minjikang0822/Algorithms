@@ -56,7 +56,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Bucket Sort](https://github.com/minjikang0822/Algorithms/blob/main/025_BucketSort.py)
 </br>
-🟡[External Sort]()
+🟢[External Sort](https://github.com/minjikang0822/Algorithms/blob/main/027_ExternalSort.py)
 </br>
 🟢[Merge Sort](https://github.com/minjikang0822/Algorithms/blob/main/023_MergeSort.py)
 </br>
@@ -96,4 +96,4 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Floyd–Warshall Algorithm](https://github.com/minjikang0822/Algorithms/blob/main/016_FloydWarshall.py)
 </br>
-🟡[Bellman–Ford Algorithm](https://github.com/minjikang0822/Algorithms/blob/main/017_BellmanFord.py)
+🟢[Bellman–Ford Algorithm](https://github.com/minjikang0822/Algorithms/blob/main/017_BellmanFord.py)
