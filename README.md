@@ -12,6 +12,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 3. [Sorting Algorithm](#Sorting-Algorithm)
 4. [Searching Algorithm](#Searching-Algorithm)
 5. [Algorithm for Finding The Shortest Paths](#Algorithm-for-Finding-The-Shortest-Paths)
+6. [Greedy Algorithm](#Greedy-Algorithm)
 
 
 
@@ -25,6 +26,8 @@ Implemented Useful Algorithms in Python for Competitive Programming
 🟢[Heap(heapq)](https://github.com/minjikang0822/Algorithms/blob/master/004_Heap(heapq).py)
 </br>
 🟡[Union-Find](https://github.com/minjikang0822/Algorithms/blob/main/018_UnionFind.py)
+</br>
+🔴[Linked List](https://github.com/minjikang0822/Algorithms/blob/main/039_LinkedList.py)
 
 
 
@@ -36,6 +39,12 @@ Implemented Useful Algorithms in Python for Competitive Programming
 🟢[Fenwick Tree (Binary Indexed Tree)](https://github.com/minjikang0822/Algorithms/blob/master/007_FenwickTree.py)
 </br>
 🔴[Kruskal's Algorithms](https://github.com/minjikang0822/Algorithms/blob/main/019_Kruskals.py)
+</br>
+🔴[Red-Black Tree](https://github.com/minjikang0822/Algorithms/blob/main/036_RedBlackTree.py)
+</br>
+🔴[AVL Tree](https://github.com/minjikang0822/Algorithms/blob/main/037_AVLTree.py)
+</br>
+🔴[B Tree](https://github.com/minjikang0822/Algorithms/blob/main/038_BTree.py)
 
 
 
@@ -97,3 +106,9 @@ Implemented Useful Algorithms in Python for Competitive Programming
 🟢[Floyd–Warshall Algorithm](https://github.com/minjikang0822/Algorithms/blob/main/016_FloydWarshall.py)
 </br>
 🟢[Bellman–Ford Algorithm](https://github.com/minjikang0822/Algorithms/blob/main/017_BellmanFord.py)
+
+
+
+## Greedy Algorithm
+</br>
+🔴[Ford-Fulkerson Algorithm](https://github.com/minjikang0822/Algorithms/blob/main/040_FordFulkerson.py)
