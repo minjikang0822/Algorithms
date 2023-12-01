@@ -30,14 +30,16 @@ def createUnsortedLargeData(test_filename, total_size):
     else:
         if not os.path.isdir(path):
             os.mkdir(path)
+            print(f"new directory {test_filename} is created")
     with open(filename, 'w') as f:
         for x in range(total_size):
             f.write(str(random.randint(0, 10000)) + '\n')
         print("new test file created")
 
 
-def createSortedChunks(test_filename, chunk_size, whlie=None):
+def createSortedChunks(test_filename, chunk_size):
     filename = f"./testFiles/{test_filename}/{test_filename}.txt"
+    chunks = []
     with open(filename, 'r') as f:
         i = 1
         while True:
@@ -54,8 +56,28 @@ def createSortedChunks(test_filename, chunk_size, whlie=None):
                 while temp_list:
                     temp = str(heapq.heappop(temp_list)) + '\n'
                     chunk.write(temp)
+            chunks.append(temp_name)
             i += 1
         print(f"total {i-1} chunks are created")
+        return chunks
+
+
+def externalSort(chunks, test_filename):
+    chunk_list = [open(chunk, 'r') for chunk in chunks]
+    temp_list = [int(f.readline()) for f in chunk_list]
+    filename = f"./testFiles/{test_filename}/sorted_{test_filename}.txt"
+
+    with open(filename, 'w') as new_file:
+        while temp_list:
+            min_val = min(temp_list)
+            min_idx = temp_list.index(min_val)
+            new_file.write(str(min_val)+'\n')
+            new_item = chunk_list[min_idx].readline()
+            if new_item == '':
+                temp_list.pop(min_idx)
+                chunk_list.pop(min_idx).close()
+            else:
+                temp_list[min_idx] = int(new_item)
 
 
 def main():
@@ -63,7 +85,8 @@ def main():
     test_filename = 'testLarge'
     chunk_size = 1000
     createUnsortedLargeData(test_filename, total_size)
-    createSortedChunks(test_filename, chunk_size)
+    chunks = createSortedChunks(test_filename, chunk_size)
+    externalSort(chunks, test_filename)
 
 
 if __name__ == "__main__":
