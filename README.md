@@ -111,3 +111,6 @@ Implemented Useful Algorithms in Python for Competitive Programming
 
 ## Greedy Algorithm
 🔴[Ford-Fulkerson Algorithm](https://github.com/minjikang0822/Algorithms/blob/main/040_FordFulkerson.py)
+<br>
+🔴[Prim's Algorithm](https://github.com/minjikang0822/Algorithms/blob/main/041_Prims.py)
+
