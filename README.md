@@ -46,7 +46,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🔴[B Tree](https://github.com/minjikang0822/Algorithms/blob/main/038_BTree.py)
 </br>
-🟡[Lowest Common Ancestor](https://github.com/minjikang0822/Algorithms/blob/main/042_LCA.py)
+🟡[Lowest Common Ancestor(LCA)](https://github.com/minjikang0822/Algorithms/blob/main/042_LCA.py)
 
 
 
