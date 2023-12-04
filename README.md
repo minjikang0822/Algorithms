@@ -25,7 +25,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Heap(heapq)](https://github.com/minjikang0822/Algorithms/blob/master/004_Heap(heapq).py)
 </br>
-🟡[Union-Find](https://github.com/minjikang0822/Algorithms/blob/main/018_UnionFind.py)
+🟢[Union-Find](https://github.com/minjikang0822/Algorithms/blob/main/018_UnionFind.py)
 </br>
 🔴[Linked List](https://github.com/minjikang0822/Algorithms/blob/main/039_LinkedList.py)
 
@@ -38,13 +38,15 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Fenwick Tree (Binary Indexed Tree)](https://github.com/minjikang0822/Algorithms/blob/master/007_FenwickTree.py)
 </br>
-🔴[Kruskal's Algorithms](https://github.com/minjikang0822/Algorithms/blob/main/019_Kruskals.py)
+🟡[Kruskal's Algorithms](https://github.com/minjikang0822/Algorithms/blob/main/019_Kruskals.py)
 </br>
 🔴[Red-Black Tree](https://github.com/minjikang0822/Algorithms/blob/main/036_RedBlackTree.py)
 </br>
 🔴[AVL Tree](https://github.com/minjikang0822/Algorithms/blob/main/037_AVLTree.py)
 </br>
 🔴[B Tree](https://github.com/minjikang0822/Algorithms/blob/main/038_BTree.py)
+</br>
+🟡[Lowest common ancestor]()
 
 
 
@@ -73,7 +75,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🔴[Pigeonhole Sort]()
 </br>
-🔴[Topological Sort](https://github.com/minjikang0822/Algorithms/blob/main/020_TopologicalSort.py)
+🟡[Topological Sort](https://github.com/minjikang0822/Algorithms/blob/main/020_TopologicalSort.py)
 
 
 
