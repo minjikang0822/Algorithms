@@ -73,7 +73,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Shell Sort](https://github.com/minjikang0822/Algorithms/blob/main/024_ShellSort.py)
 </br>
-🔴[Pigeonhole Sort]()
+🟢[Pigeonhole Sort](https://github.com/minjikang0822/Algorithms/blob/main/028_PigeonholeSort.py)
 </br>
 🟡[Topological Sort](https://github.com/minjikang0822/Algorithms/blob/main/020_TopologicalSort.py)
 
