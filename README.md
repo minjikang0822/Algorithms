@@ -38,7 +38,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Fenwick Tree (Binary Indexed Tree)](https://github.com/minjikang0822/Algorithms/blob/master/007_FenwickTree.py)
 </br>
-🟡[Kruskal's Algorithms](https://github.com/minjikang0822/Algorithms/blob/main/019_Kruskals.py)
+🟢[Kruskal's Algorithms](https://github.com/minjikang0822/Algorithms/blob/main/019_Kruskals.py)
 </br>
 🔴[Red-Black Tree](https://github.com/minjikang0822/Algorithms/blob/main/036_RedBlackTree.py)
 </br>
@@ -46,7 +46,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🔴[B Tree](https://github.com/minjikang0822/Algorithms/blob/main/038_BTree.py)
 </br>
-🟡[Lowest common ancestor]()
+🟡[Lowest Common Ancestor](https://github.com/minjikang0822/Algorithms/blob/main/042_LCA.py)
 
 
 
