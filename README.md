@@ -27,7 +27,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Union-Find](https://github.com/minjikang0822/Algorithms/blob/main/018_UnionFind.py)
 </br>
-🔴[Linked List](https://github.com/minjikang0822/Algorithms/blob/main/039_LinkedList.py)
+🟡[Linked List](https://github.com/minjikang0822/Algorithms/blob/main/039_LinkedList.py)
 
 
 
@@ -46,7 +46,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🔴[B Tree](https://github.com/minjikang0822/Algorithms/blob/main/038_BTree.py)
 </br>
-🟡[Lowest Common Ancestor(LCA)](https://github.com/minjikang0822/Algorithms/blob/main/042_LCA.py)
+🟢[Lowest Common Ancestor(LCA)](https://github.com/minjikang0822/Algorithms/blob/main/042_LCA.py)
 
 
 
@@ -75,7 +75,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Pigeonhole Sort](https://github.com/minjikang0822/Algorithms/blob/main/028_PigeonholeSort.py)
 </br>
-🟡[Topological Sort](https://github.com/minjikang0822/Algorithms/blob/main/020_TopologicalSort.py)
+🟢[Topological Sort](https://github.com/minjikang0822/Algorithms/blob/main/020_TopologicalSort.py)
 
 
 
@@ -88,7 +88,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Breadth-First Search (BFS)](https://github.com/minjikang0822/Algorithms/blob/main/014_BreadthFirstSearch(BFS).py)
 </br>
-🔴[Ternary Search]()
+🟡[Ternary Search]()
 </br>
 🔴[Jump Search]()
 </br>
