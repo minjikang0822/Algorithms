@@ -42,12 +42,29 @@ def lca(target_tree, a, b):
 def main():
     test_tree = Tree(1, Tree(2, Tree(4, Tree(8), Tree(9)), Tree(5, Tree(10), Tree(11, Tree(14), Tree(15)))),
                      Tree(3, Tree(6), Tree(7, Tree(12), Tree(13))))
-
+    '''
+               ____ 1 ____
+              /           \ 
+             2             3
+          /     \        /   \ 
+         4       5      6     7
+        / \     / \          / \ 
+       8   9   10 11        12 13
+                  / \ 
+                 14 15
+    '''
     print(lca(test_tree, 6, 5))
+    # 1
     print(lca(test_tree, 2, 2))
+    # 2
     print(lca(test_tree, 1, 2))
+    # 1
     print(lca(test_tree, 1, 13))
+    # 1
     print(lca(test_tree, 4, 14))
+    # 2
+    print(lca(test_tree, 10, 14))
+    # 5
 
 
 if __name__ == "__main__":
