@@ -88,7 +88,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Breadth-First Search (BFS)](https://github.com/minjikang0822/Algorithms/blob/main/014_BreadthFirstSearch(BFS).py)
 </br>
-🟡[Ternary Search]()
+🟢[Ternary Search](https://github.com/minjikang0822/Algorithms/blob/main/030_TernarySearch.py)
 </br>
 🔴[Jump Search]()
 </br>
