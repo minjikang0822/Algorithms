@@ -5,6 +5,7 @@ class SinglyLinkedList:
 
     def insertion(self, newNode, next_to=None):
         crr = self
+        # insert at the end of the list
         if next_to is None:
             while crr.nextNode is not None:
                 crr = crr.nextNode
@@ -40,6 +41,14 @@ class DoublyLinkedList:
         self.node = node
         self.nextNode = nextNode
         self.previousNode = previousNode
+
+    def insertBefore(self):
+        pass
+
+    def insertAfter(self):
+        pass
+
+
 
 
 class CircularSinglyLinkedList:
