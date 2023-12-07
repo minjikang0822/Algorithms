@@ -186,12 +186,68 @@ class CircularSinglyLinkedList(LinkedList):
 ##################################################
 ##################################################
 
+# can make it inherited from DoublyLinkedList class
+class CircularDoublyLinkedList(DoublyLinkedList):
+    def __init__(self, node, previousNode=None, nextNode=None):
+        super().__init__(node, previousNode, nextNode)
+        self.head = self
+        self.last = self
 
-class CircularDoublyLinkedList:
-    def __init__(self, node, nextNode=None, previousNode=None):
-        self.node = node
-        self.nextNode = nextNode
-        self.previousNode = previousNode
+    def insertHead(self, newData):
+        newNode = CircularDoublyLinkedList(newData, self.last, self.head)
+        self.head.previousNode = newNode
+        self.last.nextNode = newNode
+        self.head = newNode
+
+    def insertLast(self, newData):
+        newNode = CircularDoublyLinkedList(newData, self.last, self.head)
+        self.last.nextNode = newNode
+        self.head.previousNode = newNode
+        self.last = newNode
+
+    def insertMid(self, newData, next_to):
+        crr = self.head
+        while crr.node != next_to:
+            crr = crr.nextNode
+        newNode = CircularDoublyLinkedList(newData, crr, crr.nextNode)
+        crr.nextNode = newNode
+        crr.nextNode.previousNode = newNode
+
+    def deleteHead(self):
+        newHead = self.head.nextNode
+        self.last.nextNode = newHead
+        newHead.previousNode = self.last
+        self.head = newHead
+
+    def deleteLast(self):
+        newLast = self.head
+        while newLast.nextNode is not self.last:
+            newLast = newLast.nextNode
+        newLast.nextNode = self.head
+        self.head.previousNode = newLast
+        self.last = newLast
+
+    def deleteMid(self, target):
+        before = self.head
+        to_delete = self.head
+        after = self.head
+        while to_delete.node != target:
+            before = to_delete
+            to_delete = to_delete.nextNode
+            after = to_delete.nextNode
+        before.nextNode = after
+        after.previousNode = before
+
+    # make its parent class
+    def printCircularDoublyLinkedList(self):
+        crr = self.head
+        cnt = 0
+        while crr is not self.last:
+            print(crr.node, end=' -> ')
+            crr = crr.nextNode
+            cnt += 1
+        print(self.last.node)
+        print("↑" + "_"*(4*cnt+cnt-2) + "⅃")
 
 
 def main():
@@ -280,6 +336,11 @@ def main():
     # 3 -> 2 -> 4 -> 5 -> 1
     # ↑__________________⅃
     linkedList3.printCircularSinglyLinkedList()
+
+    print("----- Circular Doubly Linked List -----")
+    linkedList4 = CircularDoublyLinkedList(1)
+    linkedList4.insertHead(3)
+    linkedList4.printCircularDoublyLinkedList()
 
 
 if __name__ == "__main__":
