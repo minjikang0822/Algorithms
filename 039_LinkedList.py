@@ -11,6 +11,11 @@ class LinkedList:
         print(crr.node)
 
 
+##################################################
+##################################################
+##################################################
+
+
 class SinglyLinkedList(LinkedList):
     def __init__(self, node, nextNode=None):
         super().__init__(node, nextNode)
@@ -39,6 +44,11 @@ class SinglyLinkedList(LinkedList):
                 prev = prev.nextNode
             # now prev.nextNode is what we want to delete
             prev.nextNode = prev.nextNode.nextNode
+
+
+##################################################
+##################################################
+##################################################
 
 
 class DoublyLinkedList(LinkedList):
@@ -110,20 +120,75 @@ class DoublyLinkedList(LinkedList):
         self.root.printLinkedList()
 
 
-class CircularSinglyLinkedList:
-    def __init__(self, node, nextNode):
-        self.node = node
-        self.nextNode = nextNode
+##################################################
+##################################################
+##################################################
 
-    def insertion(self):
-        pass
 
-    def deletion(self):
-        pass
+class CircularSinglyLinkedList(LinkedList):
+    def __init__(self, node, nextNode=None):
+        super().__init__(node, nextNode)
+        self.head = self
+        self.last = self
+
+    def insertHead(self, newData):
+        temp = self.head
+        newHead = CircularSinglyLinkedList(newData, temp)
+        self.head = newHead
+        self.last.nextNode = newHead
+
+    def insertLast(self, newData):
+        newLast = CircularSinglyLinkedList(newData, self.head)
+        self.last.nextNode = newLast
+        self.last = newLast
+
+    def insertMid(self, newData, next_to):
+        crr = self.head
+        while crr.node != next_to:
+            crr = crr.nextNode
+        newNode = CircularSinglyLinkedList(newData, crr.nextNode)
+        crr.nextNode = newNode
+
+    def deleteHead(self):
+        newHead = self.head.nextNode
+        self.head = newHead
+        self.last.nextNode = newHead
+
+    def deleteLast(self):
+        newLast = self.head
+        while newLast.nextNode is not self.last:
+            newLast = newLast.nextNode
+        self.last.nextNode = None
+        newLast.nextNode = self.head
+        self.last = newLast
+
+    def deleteMid(self, target):
+        before = self.head
+        to_delete = self.head
+        while to_delete.node != target:
+            before = to_delete
+            to_delete = to_delete.nextNode
+        before.nextNode = to_delete.nextNode
+        to_delete.nextNode = None
+
+    def printCircularSinglyLinkedList(self):
+        crr = self.head
+        cnt = 0
+        while crr != self.last:
+            print(crr.node, end=' -> ')
+            crr = crr.nextNode
+            cnt += 1
+        print(self.last.node)
+        print("↑" + "_"*(4*cnt+cnt-2) + "⅃")
+
+
+##################################################
+##################################################
+##################################################
 
 
 class CircularDoublyLinkedList:
-    def __init__(self, node, nextNode, previousNode):
+    def __init__(self, node, nextNode=None, previousNode=None):
         self.node = node
         self.nextNode = nextNode
         self.previousNode = previousNode
@@ -131,27 +196,27 @@ class CircularDoublyLinkedList:
 
 def main():
     print("----- Singly Linked List -----")
-    linkedlist1 = SinglyLinkedList(1)
+    linkedList1 = SinglyLinkedList(1)
     # 1
-    linkedlist1.insertion(2)
+    linkedList1.insertion(2)
     # 1 -> 2
-    linkedlist1.insertion(3)
+    linkedList1.insertion(3)
     # 1 -> 2 -> 3
-    linkedlist1.insertion(4)
+    linkedList1.insertion(4)
     # 1 -> 2 -> 3 -> 4
-    linkedlist1.deletion(3)
+    linkedList1.deletion(3)
     # 1 -> 2 -> 4
-    linkedlist1.deletion(1)
+    linkedList1.deletion(1)
     # 2 -> 4
-    linkedlist1.insertion(10, 2)
+    linkedList1.insertion(10, 2)
     # 2 -> 10 -> 4
-    linkedlist1.insertion(5)
+    linkedList1.insertion(5)
     # 2 -> 10 -> 4 -> 5
-    linkedlist1.insertion(7)
+    linkedList1.insertion(7)
     # 2 -> 10 -> 4 -> 5 -> 7
-    linkedlist1.insertion(9)
+    linkedList1.insertion(9)
     # 2 -> 10 -> 4 -> 5 -> 7 -> 9
-    linkedlist1.printLinkedList()
+    linkedList1.printLinkedList()
 
     print("----- Doubly Linked List -----")
     linkedList2 = DoublyLinkedList(1)
@@ -175,6 +240,46 @@ def main():
     linkedList2.insertAfter(6)
     # 7 -> 4 -> 5 -> 2 -> 1 -> 6
     linkedList2.printDoublyLinkedList()
+
+    print("----- Circular Singly Linked List -----")
+    linkedList3 = CircularSinglyLinkedList(1)
+    linkedList3.insertHead(4)
+    # 4 -> 1
+    # ↑____⅃
+    linkedList3.insertHead(2)
+    # 2 -> 4 -> 1
+    # ↑________⅃
+    linkedList3.insertHead(3)
+    # 3 -> 2 -> 4 -> 1
+    # ↑_____________⅃
+    linkedList3.insertLast(9)
+    # 3 -> 2 -> 4 -> 1 -> 9
+    # ↑__________________⅃
+    linkedList3.insertMid(5, 4)
+    # 3 -> 2 -> 4 -> 5 -> 1 -> 9
+    # ↑_______________________⅃
+    linkedList3.insertMid(2, 1)
+    # 3 -> 2 -> 4 -> 5 -> 1 -> 2 -> 9
+    # ↑____________________________⅃
+    linkedList3.insertHead(9)
+    # 9 -> 3 -> 2 -> 4 -> 5 -> 1 -> 2 -> 9
+    # ↑_________________________________⅃
+    linkedList3.deleteLast()
+    # 9 -> 3 -> 2 -> 4 -> 5 -> 1 -> 2
+    # ↑____________________________⅃
+    linkedList3.deleteHead()
+    # 3 -> 2 -> 4 -> 5 -> 1 -> 2
+    # ↑_______________________⅃
+    linkedList3.deleteLast()
+    # 3 -> 2 -> 4 -> 5 -> 1
+    # ↑__________________⅃
+    linkedList3.deleteMid(4)
+    # 3 -> 2 -> 5 -> 1
+    # ↑_____________⅃
+    linkedList3.insertMid(4, 2)
+    # 3 -> 2 -> 4 -> 5 -> 1
+    # ↑__________________⅃
+    linkedList3.printCircularSinglyLinkedList()
 
 
 if __name__ == "__main__":
