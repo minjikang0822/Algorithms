@@ -187,9 +187,11 @@ class CircularSinglyLinkedList(LinkedList):
 ##################################################
 
 # can make it inherited from DoublyLinkedList class
-class CircularDoublyLinkedList(DoublyLinkedList):
+class CircularDoublyLinkedList:
     def __init__(self, node, previousNode=None, nextNode=None):
-        super().__init__(node, previousNode, nextNode)
+        self.node = node
+        self.previousNode = previousNode
+        self.nextNode = nextNode
         self.head = self
         self.last = self
 
@@ -340,6 +342,29 @@ def main():
     print("----- Circular Doubly Linked List -----")
     linkedList4 = CircularDoublyLinkedList(1)
     linkedList4.insertHead(3)
+    # 3 -> 1
+    # ↑___⅃
+    linkedList4.insertHead(4)
+    # 4 -> 3 -> 1
+    # ↑________⅃
+    linkedList4.insertLast(2)
+    # 4 -> 3 -> 1 -> 2
+    # ↑_____________⅃
+    linkedList4.insertMid(5, 1)
+    # 4 -> 3 -> 1 -> 5 -> 2
+    # ↑__________________⅃
+    linkedList4.insertMid(4, 3)
+    # 4 -> 3 -> 4 -> 1 -> 5 -> 2
+    # ↑_______________________⅃
+    linkedList4.deleteLast()
+    # 4 -> 3 -> 4 -> 1 -> 5
+    # ↑__________________⅃
+    linkedList4.deleteHead()
+    # 3 -> 4 -> 1 -> 5
+    # ↑_____________⅃
+    linkedList4.deleteMid(1)
+    # 3 -> 4 -> 5
+    # ↑________⅃
     linkedList4.printCircularDoublyLinkedList()
 
 
