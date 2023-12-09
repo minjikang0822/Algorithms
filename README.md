@@ -27,7 +27,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Union-Find](https://github.com/minjikang0822/Algorithms/blob/main/018_UnionFind.py)
 </br>
-🟡[Linked List](https://github.com/minjikang0822/Algorithms/blob/main/039_LinkedList.py)
+🟢[Linked List](https://github.com/minjikang0822/Algorithms/blob/main/039_LinkedList.py)
 
 
 
@@ -42,7 +42,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🔴[Red-Black Tree](https://github.com/minjikang0822/Algorithms/blob/main/036_RedBlackTree.py)
 </br>
-🔴[AVL Tree](https://github.com/minjikang0822/Algorithms/blob/main/037_AVLTree.py)
+🟡[AVL Tree](https://github.com/minjikang0822/Algorithms/blob/main/037_AVLTree.py)
 </br>
 🔴[B Tree](https://github.com/minjikang0822/Algorithms/blob/main/038_BTree.py)
 </br>
@@ -96,7 +96,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🔴[Exponential Search]()
 </br>
-🔴[Fibonacci Search]()
+🟡[Fibonacci Search]()
 </br>
 🔴[The Ubiquitous Binary Search]()
 
