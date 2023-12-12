@@ -1,5 +1,6 @@
 from collections import deque
 
+
 # self-balancing binary search tree
 class AVLTree:
     def __init__(self, node, left=None, right=None):
@@ -70,25 +71,29 @@ class AVLTree:
             if crr.left is not None:
                 queue.append(crr.left)
                 temp_list[next_depth].append(str(crr.left.node))
-                branch_list[next_depth-1].append('/')
+                branch_list[next_depth - 1].append('/')
             else:
-                temp_list[next_depth].append('#')
-                branch_list[next_depth-1].append(' ')
+                temp_list[next_depth].append('')
+                branch_list[next_depth - 1].append('')
 
             if crr.right is not None:
                 queue.append(crr.right)
                 temp_list[next_depth].append(str(crr.right.node))
-                branch_list[next_depth-1].append('\\')
+                branch_list[next_depth - 1].append('\\')
             else:
-                temp_list[next_depth].append('#')
-                branch_list[next_depth-1].append('')
+                temp_list[next_depth].append('')
+                branch_list[next_depth - 1].append('')
             done.append(crr)
 
         for i in range(len(temp_list)):
-            n = 3*tree_height-i
-            m = 3*tree_height-i
-            print('*'*n, '  '.join(temp_list[i]))
-            print('*'*m, ' '.join(branch_list[i]))
+            n = tree_height - i
+            m = tree_height - i
+            # print('*'*n, '   '.join(temp_list[i]))
+            print(' ' * n, end='  ')
+            for j in range(len(temp_list[i])):
+                print(temp_list[i][j], end='  ' if temp_list[i][j] != '' else '')
+            print()
+            print(' ' * m, ' '.join(branch_list[i]))
 
     def delete(self):
         pass
@@ -99,17 +104,28 @@ class AVLTree:
 
 def main():
     test_tree = AVLTree(10)
-    test_tree.insert(2)
+    test_tree.insert(4)
     test_tree.insert(5)
     test_tree.insert(11)
     test_tree.insert(30)
     test_tree.insert(9)
     test_tree.insert(1)
+    test_tree.insert(0)
     test_tree.insert(24)
     test_tree.insert(32)
-    test_tree.insert(4)
+    test_tree.insert(3)
+    test_tree.insert(2)
     test_tree.insert(7)
     test_tree.printTree()
+    #       10
+    #      / \
+    #      4  11
+    #     / \  \
+    #     1  5  30
+    #    / \  \ / \
+    #    0  3  9  24  32
+    #     /  /
+    #   2  7
 
 
 if __name__ == "__main__":
