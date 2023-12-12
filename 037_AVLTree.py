@@ -12,8 +12,10 @@ class AVLTree:
         self.depth = 0
 
     def balance(self):
-        balanceFactor = self.left.height - self.right.height
-        return balanceFactor
+        left_height = self.left.height if self.left is not None else 0
+        right_height = self.right.height if self.right is not None else 0
+        balanceFactor = left_height - right_height
+        return abs(balanceFactor)
 
     def insert(self, newData):
         crr = self
@@ -21,6 +23,7 @@ class AVLTree:
         newNode.height = 0
         is_leaf = False
         while True:
+            newNodeParent = crr
             if crr.node < newData:
                 if crr.right is None:
                     if crr.left is None:
@@ -36,11 +39,57 @@ class AVLTree:
                     break
                 crr = crr.left
         newNode.depth = crr.depth + 1
+
         if is_leaf:
             self.re_calculate_height(newNode)
+        # rotate the tree
+        self.rotate(newNode)
+
+    def rotate(self, newNode):
+        crr = self.root
+        newVal = newNode.node
+        while crr is not newNode and crr is not None:
+            # crr_balance = crr.balance()
+            if crr.right is None:
+                break
+            if crr.right.balance() > 1:
+                parent = crr
+                crr = crr.right
+                if crr.left.balance() < crr.right.balance():
+                    parent.right = crr.right
+                    # remove right child of crr
+                    crr.right = None
+                    # decrease crr's height by 1
+                    crr.height -= 1
+                    parent.right.left = crr
+                    parent.recalculateDepth(parent.depth)
+                    break
+            if crr.node > newVal:
+                crr = crr.left
+            else:
+                crr = crr.right
+
+    def recalculateDepth(self, new_depth):
+        self.depth = new_depth
+        if self.left is not None:
+            self.left.recalculateDepth(new_depth+1)
+        if self.right is not None:
+            self.right.recalculateDepth(new_depth+1)
+
+    def rotateLeftLeft(self, parent):
+        pass
+
+    def rotateRightRight(self):
+        pass
+
+    def rotateLeftRight(self):
+        pass
+
+    def rotateRightLeft(self):
+        pass
 
     def re_calculate_height(self, newNode):
-        crr = self
+        crr = self.root
         root_height = 0
         newData = newNode.node
         while crr is not newNode:
@@ -103,7 +152,7 @@ class AVLTree:
 
 
 def main():
-    test_tree = AVLTree(10)
+    '''test_tree = AVLTree(10)
     test_tree.insert(4)
     test_tree.insert(5)
     test_tree.insert(11)
@@ -116,7 +165,7 @@ def main():
     test_tree.insert(3)
     test_tree.insert(2)
     test_tree.insert(7)
-    test_tree.printTree()
+    test_tree.printTree()'''
     #       10
     #      / \
     #      4  11
@@ -126,6 +175,26 @@ def main():
     #    0  3  9  24  32
     #     /  /
     #   2  7
+
+    test_tree2 = AVLTree(9)
+    test_tree2.insert(4)
+    test_tree2.insert(1)
+    test_tree2.insert(5)
+    test_tree2.insert(11)
+    test_tree2.insert(10)
+    test_tree2.insert(14)
+    test_tree2.insert(15)
+    test_tree2.insert(20)
+    test_tree2.printTree()
+    #       9
+    #      / \
+    #      4  14
+    #     / \
+    #     1  5
+    #    / \
+    #    11  15
+    #    \
+    #   20
 
 
 if __name__ == "__main__":
