@@ -23,7 +23,6 @@ class AVLTree:
         newNode.height = 0
         is_leaf = False
         while True:
-            newNodeParent = crr
             if crr.node < newData:
                 if crr.right is None:
                     if crr.left is None:
@@ -46,23 +45,20 @@ class AVLTree:
         self.rotate(newNode)
 
     def rotate(self, newNode):
+        parent = self.root
         crr = self.root
         newVal = newNode.node
-        while crr is not newNode and crr is not None:
-            # crr_balance = crr.balance()
-            if crr.right is None:
-                break
-            if crr.right.balance() > 1:
-                parent = crr
-                crr = crr.right
-                if crr.left.balance() < crr.right.balance():
-                    parent.right = crr.right
-                    # remove right child of crr
-                    crr.right = None
-                    # decrease crr's height by 1
-                    crr.height -= 1
-                    parent.right.left = crr
-                    parent.recalculateDepth(parent.depth)
+        while crr is not newNode:
+            left_balance = crr.left.balance() if crr.left is not None else 0
+            right_balance = crr.right.balance() if crr.right is not None else 0
+            print(crr.node, crr.height)
+            if left_balance > 1:
+                print("hallo")
+                if parent is self.root:
+                    print("here")
+                    self.root = crr
+                    parent.left = None
+                    crr.right = parent
                     break
             if crr.node > newVal:
                 crr = crr.left
@@ -179,12 +175,12 @@ def main():
     test_tree2 = AVLTree(9)
     test_tree2.insert(4)
     test_tree2.insert(1)
-    test_tree2.insert(5)
+    '''test_tree2.insert(5)
     test_tree2.insert(11)
     test_tree2.insert(10)
     test_tree2.insert(14)
     test_tree2.insert(15)
-    test_tree2.insert(20)
+    test_tree2.insert(20)'''
     test_tree2.printTree()
     #       9
     #      / \
