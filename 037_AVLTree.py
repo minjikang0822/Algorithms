@@ -8,7 +8,7 @@ class AVLTree:
         self.node = node
         self.left = left
         self.right = right
-        self.height = 0
+        self.height = 1
         self.depth = 0
 
     def balance(self):
@@ -20,7 +20,7 @@ class AVLTree:
     def insert(self, newData):
         crr = self
         newNode = AVLTree(newData)
-        newNode.height = 0
+        newNode.height = 1
         is_leaf = False
         while True:
             if crr.node < newData:
@@ -49,17 +49,24 @@ class AVLTree:
         crr = self.root
         newVal = newNode.node
         while crr is not newNode:
-            left_balance = crr.left.balance() if crr.left is not None else 0
-            right_balance = crr.right.balance() if crr.right is not None else 0
-            print(crr.node, crr.height)
-            if left_balance > 1:
-                print("hallo")
-                if parent is self.root:
-                    print("here")
-                    self.root = crr
-                    parent.left = None
-                    crr.right = parent
-                    break
+            if crr.balance() > 1:
+                left_balance = crr.left.balance() if crr.left is not None else 0
+                right_balance = crr.right.balance() if crr.right is not None else 0
+                if left_balance > right_balance:
+                    if crr is self.root:
+                        crr = crr.left
+                        self.root = crr
+                        parent.left = None
+                        crr.right = parent
+
+                        crr.height = parent.height
+                        crr_left = crr.left
+                        while crr_left:
+                            crr_left.depth -= 1
+                            crr_left = crr_left.left
+                        parent.depth += 1
+                        parent.height -= 1
+                        break
             if crr.node > newVal:
                 crr = crr.left
             else:
@@ -86,7 +93,7 @@ class AVLTree:
 
     def re_calculate_height(self, newNode):
         crr = self.root
-        root_height = 0
+        root_height = 1
         newData = newNode.node
         while crr is not newNode:
             if crr is not self.root:
@@ -181,7 +188,8 @@ def main():
     test_tree2.insert(14)
     test_tree2.insert(15)
     test_tree2.insert(20)'''
-    test_tree2.printTree()
+    test_tree2.root.printTree()
+    print(test_tree2.root.node)
     #       9
     #      / \
     #      4  14
