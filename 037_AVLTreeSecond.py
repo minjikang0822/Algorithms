@@ -101,9 +101,11 @@ class AVLTree:
         L = A.left
         A.height = max(L.height if L is not None else 0, RL.height if RL is not None else 0) + 1
         R.height = max(A.height, R.right.height) + 1
-        self.recalculateDepth(A_parent)
+        print("A_parent", A_parent.key)
+        #self.recalculateDepth(A_parent)
 
     def recalculateDepth(self, parent):
+        print(parent.key)
         parent_depth = parent.depth
         if parent.left is not None:
             parent.left.depth = parent_depth + 1
@@ -123,9 +125,9 @@ class AVLTree:
 
     def printTree(self):
         tree_height = self.root.height
-        temp_list = [[] for _ in range(tree_height + 1)]
-        branch_list = [[] for _ in range(tree_height + 1)]
-        temp_list[0] = [str(self.root.key)]
+        node_list = [[] for _ in range(tree_height + 1)]
+        branch_list = [[] for _ in range(tree_height + 2)]
+        node_list[1] = [str(self.root.key)]
         done = []
         queue = deque([self.root])
         while queue:
@@ -137,71 +139,37 @@ class AVLTree:
                 continue
             if crr.left is not None:
                 queue.append(crr.left)
-                temp_list[next_depth].append(str(crr.left.key))
-                branch_list[next_depth - 1].append('/')
+                node_list[next_depth].append(str(crr.left.key))
+                branch_list[next_depth].append('/')
             else:
-                temp_list[next_depth].append('')
-                branch_list[next_depth - 1].append('')
+                node_list[next_depth].append('')
+                branch_list[next_depth].append('')
 
             if crr.right is not None:
                 queue.append(crr.right)
-                temp_list[next_depth].append(str(crr.right.key))
-                branch_list[next_depth - 1].append('\\')
+                node_list[next_depth].append(str(crr.right.key))
+                branch_list[next_depth].append('\\')
             else:
-                temp_list[next_depth].append('')
-                branch_list[next_depth - 1].append('')
+                node_list[next_depth].append('')
+                branch_list[next_depth].append('')
             done.append(crr)
-
-        for i in range(len(temp_list)):
+        node_list = node_list[1:]
+        branch_list = branch_list[1:]
+        for i in range(len(node_list)):
             n = tree_height - i
-            m = tree_height - i
-            # print('*'*n, '   '.join(temp_list[i]))
-            print(' ' * n, end='  ')
-            for j in range(len(temp_list[i])):
-                print(temp_list[i][j], end='  ' if temp_list[i][j] != '' else '')
-            print()
-            print(' ' * m, ' '.join(branch_list[i]))
+            for j in range(len(node_list[i])):
+                print(node_list[i][j], end='  ' if node_list[i][j] != '' else '')
+            print("\n", ' '.join(branch_list[i+1]))
 
 
 def main():
-    '''test_tree = AVLTree(10)
+    test_tree = AVLTree(3)
     test_tree.insert(4)
     test_tree.insert(5)
-    test_tree.insert(11)
-    test_tree.insert(30)
-    test_tree.insert(9)
-    test_tree.insert(1)
-    test_tree.insert(0)
-    test_tree.insert(24)
-    test_tree.insert(32)
-    test_tree.insert(3)
-    test_tree.insert(2)
     test_tree.insert(7)
-    test_tree.printTree()'''
-    #       10
-    #      / \
-    #      4  11
-    #     / \  \
-    #     1  5  30
-    #    / \  \ / \
-    #    0  3  9  24  32
-    #     /  /
-    #   2  7
-
-    test_tree2 = AVLTree(3)
-    test_tree2.insert(4)
-    test_tree2.insert(5)
-    # test_tree2.printTree()
-    print(test_tree2.root.depth)
-    #       9
-    #      / \
-    #      4  14
-    #     / \
-    #     1  5
-    #    / \
-    #    11  15
-    #    \
-    #   20
+    test_tree.insert(9)
+    test_tree.printTree()
+    # print(test_tree2.root.depth)
 
 
 if __name__ == "__main__":
