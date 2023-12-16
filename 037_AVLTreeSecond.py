@@ -22,6 +22,7 @@ class AVLTree:
     def insert(self, newVal):
         newNode = Node(newVal)
         crr = self.root
+        crr_parent = crr
         while True:
             if crr.key > newVal:
                 crr.height += 1
@@ -32,6 +33,7 @@ class AVLTree:
                         self.resetHeight(newNode)
                     self.updateRootHeight()
                     break
+                crr_parent = crr
                 crr = crr.left
             else:
                 crr.height += 1
@@ -41,10 +43,10 @@ class AVLTree:
                     if crr.left is not None:
                         self.resetHeight(newNode)
                     self.updateRootHeight()
-                    print("balance", crr.balance())
-                    if crr.balance() > 1:
-                        self.leftRotation(crr)
+                    if crr_parent.balance() > 1:
+                        self.leftRotation(crr_parent)
                     break
+                crr_parent = crr
                 crr = crr.right
 
     def updateRootHeight(self):
@@ -75,23 +77,29 @@ class AVLTree:
         print("Left Rotate at", A.key)
         A_parent = self.root
         target_value = A.key
-        while A_parent.left is A or A_parent.right is A:
-            if A_parent.key > target_value:
-                A_parent = A_parent.left
-            else:
-                A_parent = A_parent.right
+        if A is not self.root:
+            while A_parent.left is A or A_parent.right is A:
+                if A_parent.key > target_value:
+                    A_parent = A_parent.left
+                else:
+                    A_parent = A_parent.right
+
         R = A.right
         RL = R.left
 
         A.right = RL
         R.left = A
-
-        if A_parent.left is A:
-            A_parent.left = R
+        if A is self.root:
+            R.depth = 1
+            self.root = R
+            A_parent = self.root
         else:
-            A_parent.right = R
+            if A_parent.left is A:
+                A_parent.left = R
+            else:
+                A_parent.right = R
         L = A.left
-        A.height = max(L.height, RL.height) + 1
+        A.height = max(L.height if L is not None else 0, RL.height if RL is not None else 0) + 1
         R.height = max(A.height, R.right.height) + 1
         self.recalculateDepth(A_parent)
 
@@ -184,7 +192,7 @@ def main():
     test_tree2.insert(4)
     test_tree2.insert(5)
     # test_tree2.printTree()
-    print(test_tree2.root.height)
+    print(test_tree2.root.depth)
     #       9
     #      / \
     #      4  14
