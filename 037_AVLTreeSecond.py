@@ -30,19 +30,28 @@ class AVLTree:
                     newNode.depth = crr.depth + 1
                     crr.left = newNode
                     if crr.right is not None:
+                        # no change in their heights
+                        '''
+                        ex)
+                            A           A
+                             \   =>   /   \   => No change in their heights
+                              C      B     C 
+                        '''
                         self.resetHeight(newNode)
                     self.updateRootHeight()
                     break
                 crr_parent = crr
                 crr = crr.left
+            # crr.key <= newVal
             else:
                 if crr.right is None:
                     newNode.depth = crr.depth + 1
                     crr.right = newNode
                     if crr.left is not None:
+                        # no change in their height
                         self.resetHeight(newNode)
                     self.updateRootHeight()
-                    print("crr: ", crr.key)
+                    # print("crr: ", crr.key)
                     subtreeRoot = self.unbalanced_A(crr)
                     if subtreeRoot.balance() > 1:
                         self.leftRotation(subtreeRoot)
@@ -117,7 +126,7 @@ class AVLTree:
             R.depth = 1
             self.root = R
             A_parent = self.root
-        print("parent", A_parent.key)
+        # print("parent", A_parent.key)
 
         A.height = max(L.height if L is not None else 0, RL.height if RL is not None else 0) + 1
         R.height = max(A.height, R.right.height) + 1
@@ -161,23 +170,23 @@ class AVLTree:
                 node_list[next_depth].append(str(crr.left.key))
                 branch_list[next_depth].append('/')
             else:
-                node_list[next_depth].append('')
+                node_list[next_depth].append(' ')
                 branch_list[next_depth].append('')
 
             if crr.right is not None:
                 queue.append(crr.right)
                 node_list[next_depth].append(str(crr.right.key))
-                branch_list[next_depth].append('\\')
+                branch_list[next_depth].append('\\ ')
             else:
-                node_list[next_depth].append('')
+                node_list[next_depth].append(' ')
                 branch_list[next_depth].append('')
             done.append(crr)
         node_list = node_list[1:]
         branch_list = branch_list[1:]
-        for i in range(len(node_list)):
-            n = tree_height - i
+        for i in range(len(node_list)-1):
+            # n = tree_height - i
             for j in range(len(node_list[i])):
-                print(node_list[i][j], end='  ' if node_list[i][j] != '' else '')
+                print(node_list[i][j], end='  ' if node_list[i][j] != ' ' else '')
             print("\n", ' '.join(branch_list[i+1]))
 
 
@@ -185,10 +194,12 @@ def main():
     test_tree = AVLTree(3)
     test_tree.insert(4)
     test_tree.insert(5)
-    test_tree.insert(7)
+    test_tree.insert(8)
     test_tree.insert(9)
     test_tree.insert(10)
     test_tree.insert(11)
+    test_tree.insert(6)
+    test_tree.insert(7)
     test_tree.printTree()
 #    test_node = test_tree.root.right.right.right
 #    print(test_node.key)
