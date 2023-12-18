@@ -42,11 +42,25 @@ class AVLTree:
                     if crr.left is not None:
                         self.resetHeight(newNode)
                     self.updateRootHeight()
-                    if crr_parent.balance() > 1:
-                        self.leftRotation(crr_parent)
+                    print("crr: ", crr.key)
+                    if self.root.balance() > 1:
+                        self.leftRotation(self.unbalanced_A(crr))
                     break
                 crr_parent = crr
                 crr = crr.right
+
+    def unbalanced_A(self, target):
+        target_key = target.key
+        crr = self.root
+        A = crr
+        while crr is not target:
+            if crr.balance() > 1:
+                A = crr
+            if crr.key > target_key:
+                crr = crr.left
+            else:
+                crr = crr.right
+        return A
 
     def updateRootHeight(self):
         left_height = self.root.left.height if self.root.left is not None else 0
@@ -172,10 +186,12 @@ def main():
     test_tree.insert(5)
     test_tree.insert(7)
     test_tree.insert(9)
+    test_tree.insert(10)
     test_tree.printTree()
-    test_node = test_tree.root.left
-    print(test_node.key)
-    print(test_node.depth)
+#    test_node = test_tree.root.right.right.right
+#    print(test_node.key)
+#    print(test_node.height)
+#    print(test_tree.root.balance())
 
 
 if __name__ == "__main__":
