@@ -1,116 +1,167 @@
 from collections import deque
 
 
-# self-balancing binary search tree
-class AVLTree:
-    def __init__(self, node, left=None, right=None):
-        self.root = self
-        self.node = node
+class Node:
+    def __init__(self, key, left=None, right=None):
+        self.key = key
         self.left = left
         self.right = right
-        self.height = 1
+        self.height = 0
         self.depth = 0
 
     def balance(self):
-        left_height = self.left.height if self.left is not None else 0
-        right_height = self.right.height if self.right is not None else 0
-        balanceFactor = left_height - right_height
-        return abs(balanceFactor)
+        left_height = self.left.height if self.left is not None else -1
+        right_height = self.right.height if self.right is not None else -1
+        return left_height - right_height
 
-    def insert(self, newData):
-        crr = self
-        newNode = AVLTree(newData)
-        newNode.height = 1
-        is_leaf = False
+    def printNodeInfo(self):
+        print("key:", self.key, end=" | ")
+        print("height:", self.height, end=" | ")
+        print("depth:", self.depth, end=" | ")
+        print("balance:", self.balance())
+
+
+class AVLTree:
+    def __init__(self, root):
+        self.root = Node(root)
+
+    def insert(self, newVal):
+        newNode = Node(newVal)
+        crr = self.root
         while True:
-            if crr.node < newData:
-                if crr.right is None:
-                    if crr.left is None:
-                        is_leaf = True
-                    crr.right = newNode
-                    break
-                crr = crr.right
-            else:
+            if crr.key > newVal:
                 if crr.left is None:
-                    if crr.right is None:
-                        is_leaf = True
+                    newNode.depth = crr.depth + 1
                     crr.left = newNode
                     break
                 crr = crr.left
-        newNode.depth = crr.depth + 1
+            # crr.key <= newVal
+            else:
+                if crr.right is None:
+                    newNode.depth = crr.depth + 1
+                    crr.right = newNode
+                    break
+                crr = crr.right
+        print("---------", newVal, "inserted ---------")
+        self.printTree()
+        self.recalculateHeight(newNode)
+        A, A_parent = self.unbalanced_A(crr)
+        # RIGHT HEAVY => Left Rotation OR Right-Left Rotation
+        if A.balance() < -1:
+            L = A.left
+            R = A.right
+            subLeft_height = R.left.height if R.left is not None else -1
+            subRight_height = R.right.height if R.right is not None else -1
+            # CASE #1: LEFT ROTATION
+            # ***RIGHT HEAVY*** + NEW NODE INSERTED TO RIGHT SUBTREE
+            if subLeft_height < subRight_height:
+                self.leftRotation(A, A_parent)
+            # ***RIGHT HEAVY*** + NEW NODE INSERTED LEFT SUBTREE HEAVY
+            else:
+                self.leftRightRotation(A, A_parent)
 
-        if is_leaf:
-            self.re_calculate_height(newNode)
-        # rotate the tree
-        self.rotate(newNode)
-
-    def rotate(self, newNode):
-        parent = self.root
+    def unbalanced_A(self, target):
+        target_key = target.key
         crr = self.root
-        newVal = newNode.node
-        while crr is not newNode:
-            if crr.balance() > 1:
-                left_balance = crr.left.balance() if crr.left is not None else 0
-                right_balance = crr.right.balance() if crr.right is not None else 0
-                if left_balance > right_balance:
-                    if crr is self.root:
-                        crr = crr.left
-                        self.root = crr
-                        parent.left = None
-                        crr.right = parent
+        crr_parent = self.root
+        A = crr
+        A_parent = crr_parent
+        while crr is not target:
+            if abs(crr.balance()) > 1:
+                A = crr
+                A_parent = crr_parent
+            if crr.key > target_key:
+                crr_parent = crr
+                crr = crr.left
+            else:
+                crr_parent = crr
+                crr = crr.right
+        return A, A_parent
 
-                        crr.height = parent.height
-                        crr_left = crr.left
-                        while crr_left:
-                            crr_left.depth -= 1
-                            crr_left = crr_left.left
-                        parent.depth += 1
-                        parent.height -= 1
-                        break
-            if crr.node > newVal:
+    def leftRotation(self, A, A_parent):
+        """
+            LEFT ROTATION
+                      A                       R
+                   /     \                /       \
+                  L       R     ==>      A        RR
+                        /   \          /   \
+                       RL   RR        L     RL
+        """
+
+        L = A.left
+        R = A.right
+        RL = R.left
+        RR = R.right
+
+        A.right = RL
+        R.left = A
+
+        if A is self.root:
+            R.depth = 0
+            A_parent = R
+            self.root = A_parent
+        else:
+            A_parent.right = R
+
+        A.height = max(L.height if L is not None else -1, RL.height if RL is not None else -1) + 1
+        R.height = max(A.height if A is not None else -1, RR.height if RR is not None else -1) + 1
+        self.recalculateHeight(R)
+        self.recalculateDepth(A_parent)
+        print("----- Left Rotation at", A.key, "-----")
+        self.printTree()
+
+    def rightRotation(self, A, A_parent):
+        """
+            RIGHT ROTATION
+                      A                       L
+                   /     \                /       \
+                  L       R     ==>      LL         A
+                /   \                             /   \
+               LL   LR                           LR    R
+        """
+        print("----- Right Rotation at", A.key, "-----")
+        self.printTree()
+
+    def leftRightRotation(self, A, A_parent):
+        print("Left Right Rotate at", A.key)
+        self.printTree()
+
+    def rightLeftRotation(self, A, A_parent):
+        print("----- Right Left Rotation at", A.key, "-----")
+        self.printTree()
+
+    def recalculateDepth(self, R):
+        parent_depth = R.depth
+        if R.left is not None:
+            R.left.depth = parent_depth + 1
+            self.recalculateDepth(R.left)
+        if R.right is not None:
+            R.right.depth = parent_depth + 1
+            self.recalculateDepth(R.right)
+
+    def recalculateHeight(self, subRoot):
+        if subRoot is self.root:
+            return
+        crr = self.root
+        subRootParent = crr
+        subRootKey = subRoot.key
+        while crr is not subRoot:
+            subRootParent = crr
+            if crr.key > subRootKey:
                 crr = crr.left
             else:
                 crr = crr.right
 
-    def recalculateDepth(self, new_depth):
-        self.depth = new_depth
-        if self.left is not None:
-            self.left.recalculateDepth(new_depth+1)
-        if self.right is not None:
-            self.right.recalculateDepth(new_depth+1)
-
-    def rotateLeftLeft(self, parent):
-        pass
-
-    def rotateRightRight(self):
-        pass
-
-    def rotateLeftRight(self):
-        pass
-
-    def rotateRightLeft(self):
-        pass
-
-    def re_calculate_height(self, newNode):
-        crr = self.root
-        root_height = 1
-        newData = newNode.node
-        while crr is not newNode:
-            if crr is not self.root:
-                crr.height += 1
-            root_height += 1
-            if crr.node > newData:
-                crr = crr.left
-            else:
-                crr = crr.right
-        if self.root.height < root_height:
-            self.root.height = root_height
+        leftHeight = subRootParent.left.height if subRootParent.left is not None else -1
+        rightHeight = subRootParent.right.height if subRootParent.right is not None else -1
+        subRootParent.height = max(leftHeight, rightHeight) + 1
+        self.recalculateHeight(subRootParent)
 
     def printTree(self):
         tree_height = self.root.height
-        temp_list = [[] for _ in range(tree_height + 1)]
-        branch_list = [[] for _ in range(tree_height + 1)]
-        temp_list[0] = [str(self.root.node)]
+        node_list = [[] for _ in range(tree_height + 1)]
+        branch_list = [[] for _ in range(tree_height + 2)]
+        node_list[0] = [str(self.root.key)]
         done = []
         queue = deque([self.root])
         while queue:
@@ -122,83 +173,53 @@ class AVLTree:
                 continue
             if crr.left is not None:
                 queue.append(crr.left)
-                temp_list[next_depth].append(str(crr.left.node))
-                branch_list[next_depth - 1].append('/')
+                node_list[next_depth].append(str(crr.left.key))
+                branch_list[next_depth].append('/')
             else:
-                temp_list[next_depth].append('')
-                branch_list[next_depth - 1].append('')
+                node_list[next_depth].append(' ')
+                branch_list[next_depth].append('')
 
             if crr.right is not None:
                 queue.append(crr.right)
-                temp_list[next_depth].append(str(crr.right.node))
-                branch_list[next_depth - 1].append('\\')
+                node_list[next_depth].append(str(crr.right.key))
+                branch_list[next_depth].append('\\ ')
             else:
-                temp_list[next_depth].append('')
-                branch_list[next_depth - 1].append('')
+                node_list[next_depth].append(' ')
+                branch_list[next_depth].append('')
             done.append(crr)
-
-        for i in range(len(temp_list)):
-            n = tree_height - i
-            m = tree_height - i
-            # print('*'*n, '   '.join(temp_list[i]))
-            print(' ' * n, end='  ')
-            for j in range(len(temp_list[i])):
-                print(temp_list[i][j], end='  ' if temp_list[i][j] != '' else '')
-            print()
-            print(' ' * m, ' '.join(branch_list[i]))
-
-    def delete(self):
-        pass
-
-    def search(self):
-        pass
+        branch_list = branch_list[1:]
+        for i in range(len(node_list)):
+            # n = tree_height - i
+            for j in range(len(node_list[i])):
+                print(node_list[i][j], end='  ' if node_list[i][j] != ' ' else '')
+            if i == len(branch_list) - 1:
+                break
+            print("\n", ' '.join(branch_list[i]))
+        print("\n------------------------------")
 
 
 def main():
-    '''test_tree = AVLTree(10)
+    test_tree = AVLTree(3)
     test_tree.insert(4)
     test_tree.insert(5)
-    test_tree.insert(11)
-    test_tree.insert(30)
+    test_tree.insert(8)
     test_tree.insert(9)
-    test_tree.insert(1)
-    test_tree.insert(0)
-    test_tree.insert(24)
-    test_tree.insert(32)
-    test_tree.insert(3)
-    test_tree.insert(2)
+    test_tree.insert(10)
+    test_tree.insert(11)
+    test_tree.insert(6)
     test_tree.insert(7)
-    test_tree.printTree()'''
-    #       10
-    #      / \
-    #      4  11
-    #     / \  \
-    #     1  5  30
-    #    / \  \ / \
-    #    0  3  9  24  32
-    #     /  /
-    #   2  7
-
-    test_tree2 = AVLTree(9)
-    test_tree2.insert(4)
-    test_tree2.insert(1)
-    '''test_tree2.insert(5)
-    test_tree2.insert(11)
-    test_tree2.insert(10)
-    test_tree2.insert(14)
-    test_tree2.insert(15)
-    test_tree2.insert(20)'''
-    test_tree2.root.printTree()
-    print(test_tree2.root.node)
-    #       9
-    #      / \
-    #      4  14
-    #     / \
-    #     1  5
-    #    / \
-    #    11  15
-    #    \
-    #   20
+    test_tree.printTree()
+    '''
+                    8
+                /        \
+               4         10
+             /   \      /   \
+            3     6    9    11
+                /   \
+                5    7
+    '''
+    test_node = test_tree.root.right.right
+    test_node.printNodeInfo()
 
 
 if __name__ == "__main__":
