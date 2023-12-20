@@ -56,17 +56,16 @@ class AVLTree:
                         height_increased = False
                     break
                 crr = crr.right
-        print(newVal, "added")
+        print("---------", newVal, "inserted ---------")
+        self.printTree()
         if not height_increased:
             self.resetHeight(newNode)
             self.updateRootHeight()
         else:
-            print("Height Increased")
             self.updateRootHeight()
             A, A_parent = self.unbalanced_A(crr)
             # RIGHT HEAVY => Left Rotation OR Right-Left Rotation
             if A.balance() < -1:
-                print("here A:", A.key, "A Balance:", A.balance(), "A Height:", A.height)
                 L = A.left
                 R = A.right
                 subLeft_height = R.left.height if R.left is not None else -1
@@ -122,7 +121,7 @@ class AVLTree:
     """
 
     def leftRotation(self, A, A_parent):
-        print("Left Rotate at", A.key)
+        print("----- Left Rotation at", A.key, "-----")
 
         L = A.left
         R = A.right
@@ -140,10 +139,10 @@ class AVLTree:
             A_parent.right = R
 
         A.height = max(L.height if L is not None else -1, RL.height if RL is not None else -1) + 1
-        A.printNodeInfo()
         R.height = max(A.height if A is not None else -1, RR.height if RR is not None else -1) + 1
-        R.printNodeInfo()
+        self.recalculateHeight(R)
         self.recalculateDepth(A_parent)
+        self.printTree()
 
     def rightRotation(self, A, A_parent):
         print("Right Rotate at", A.key)
@@ -165,6 +164,27 @@ class AVLTree:
         if R.right is not None:
             R.right.depth = parent_depth + 1
             self.recalculateDepth(R.right)
+
+    def recalculateHeight(self, subRoot):
+        if subRoot is self.root:
+            return
+        crr = self.root
+        subRootParent = crr
+        subRootKey = subRoot.key
+        while crr is not subRoot:
+            subRootParent = crr
+            if crr.key > subRootKey:
+                crr = crr.left
+            else:
+                crr = crr.right
+
+        leftHeight = subRootParent.left.height if subRootParent.left is not None else -1
+        rightHeight = subRootParent.right.height if subRootParent.right is not None else -1
+        subRootParent.height = max(leftHeight, rightHeight) + 1
+        self.recalculateHeight(subRootParent)
+
+
+
 
     """
     RIGHT ROTATION
@@ -210,8 +230,10 @@ class AVLTree:
             # n = tree_height - i
             for j in range(len(node_list[i])):
                 print(node_list[i][j], end='  ' if node_list[i][j] != ' ' else '')
+            if i == len(branch_list) - 1:
+                break
             print("\n", ' '.join(branch_list[i]))
-        print(node_list)
+        print("\n------------------------------")
 
 
 def main():
@@ -234,8 +256,8 @@ def main():
                 /   \
                 5    7
     '''
-    test_node = test_tree.root
-    test_node.printNodeInfo()
+    """test_node = test_tree.root
+    test_node.printNodeInfo()"""
 
 
 if __name__ == "__main__":
