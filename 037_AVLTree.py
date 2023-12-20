@@ -80,12 +80,14 @@ class AVLTree:
 
     def leftRotation(self, A, A_parent):
         """
-            LEFT ROTATION
+            CASE #4: LEFT ROTATION
                       A                       R
                    /     \                /       \
                   L       R     ==>      A        RR
-                        /   \          /   \
-                       RL   RR        L     RL
+                        /   \          /   \       |
+                       RL   RR        L     RL   *NEW NODE*
+                            |
+                        *NEW NODE*
         """
 
         L = A.left
@@ -112,17 +114,39 @@ class AVLTree:
 
     def rightRotation(self, A, A_parent):
         """
-            RIGHT ROTATION
+            CASE #1: RIGHT ROTATION
                       A                       L
                    /     \                /       \
                   L       R     ==>      LL         A
-                /   \                             /   \
-               LL   LR                           LR    R
+                /   \                    |        /   \
+               LL   LR              *NEW NODE*   LR    R
+               |
+           *NEW NODE*
         """
         print("----- Right Rotation at", A.key, "-----")
         self.printTree()
 
     def leftRightRotation(self, A, A_parent):
+        """
+            CASE #2: LEFT RIGHT ROTATION
+            A)
+                      A                        A                         LR
+                   /     \      LEFT       /       \      RIGHT      /        \
+                  L       R     ==>      LR         R      ==>      L          A
+                /   \                   /                        /     \        \
+               LL   LR                L                        LL   *NEW NODE*   R
+                    /              /     \
+               *NEW NODE*         LL   *NEW NODE*
+
+            B)
+                      A                        A                         LR
+                   /     \      LEFT       /       \      RIGHT      /        \
+                  L       R     ==>      LR         R      ==>      L          A
+                /   \                  /  \                        /        /     \
+               LL   LR               L   *NEW NODE*               LL   *NEW NODE*  R
+                      \             /
+                  *NEW NODE*      LL
+        """
         print("Left Right Rotate at", A.key)
         self.printTree()
 
