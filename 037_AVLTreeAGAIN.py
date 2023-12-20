@@ -14,6 +14,12 @@ class Node:
         right_height = self.right.height if self.right is not None else -1
         return left_height - right_height
 
+    def printNodeInfo(self):
+        print("key:", self.key, end=" | ")
+        print("height:", self.height, end=" | ")
+        print("depth:", self.depth, end=" | ")
+        print("balance:", self.balance())
+
 
 class AVLTree:
     def __init__(self, root):
@@ -38,6 +44,7 @@ class AVLTree:
                               C      B     C 
                         '''
                         height_increased = False
+                    break
                 crr = crr.left
             # crr.key <= newVal
             else:
@@ -47,31 +54,48 @@ class AVLTree:
                     if crr.left is not None:
                         # no change in their height
                         height_increased = False
+                    break
                 crr = crr.right
-
-            if not height_increased:
-                self.resetHeight(newNode)
-                self.updateRootHeight()
-                break
-
+        print(newVal, "added")
+        if not height_increased:
+            self.resetHeight(newNode)
             self.updateRootHeight()
-            subtreeRoot = self.unbalanced_A(crr)
-            if subtreeRoot.balance() > 1:
-                self.leftRotation(subtreeRoot)
-            break
+        else:
+            print("Height Increased")
+            self.updateRootHeight()
+            A, A_parent = self.unbalanced_A(crr)
+            # RIGHT HEAVY => Left Rotation OR Right-Left Rotation
+            if A.balance() < -1:
+                print("here A:", A.key, "A Balance:", A.balance(), "A Height:", A.height)
+                L = A.left
+                R = A.right
+                subLeft_height = R.left.height if R.left is not None else -1
+                subRight_height = R.right.height if R.right is not None else -1
+                # CASE #1: LEFT ROTATION
+                # ***RIGHT HEAVY*** + NEW NODE INSERTED TO RIGHT SUBTREE
+                if subLeft_height < subRight_height:
+                    self.leftRotation(A, A_parent)
+                # ***RIGHT HEAVY*** + NEW NODE INSERTED LEFT SUBTREE HEAVY
+                else:
+                    self.leftRightRotation(A, A_parent)
 
     def unbalanced_A(self, target):
         target_key = target.key
         crr = self.root
+        crr_parent = self.root
         A = crr
+        A_parent = crr_parent
         while crr is not target:
             if abs(crr.balance()) > 1:
                 A = crr
+                A_parent = crr_parent
             if crr.key > target_key:
+                crr_parent = crr
                 crr = crr.left
             else:
+                crr_parent = crr
                 crr = crr.right
-        return A
+        return A, A_parent
 
     def updateRootHeight(self):
         left_height = self.root.left.height if self.root.left is not None else -1
@@ -97,42 +121,41 @@ class AVLTree:
                RL   RR        L     RL
     """
 
-    def leftRotation(self, A):
+    def leftRotation(self, A, A_parent):
         print("Left Rotate at", A.key)
-        A_parent = self.root
-        target_value = A.key
 
+        L = A.left
         R = A.right
         RL = R.left
+        RR = R.right
 
         A.right = RL
         R.left = A
-        L = A.left
 
-        if A is not self.root:
-            while True:
-                if A_parent.key > target_value:
-                    if A_parent.left is A:
-                        A_parent.left = R
-                        R.depth -= 1
-                        break
-                    A_parent = A_parent.left
-                else:
-                    if A_parent.right is A:
-                        A_parent.right = R
-                        R.depth -= 1
-                        break
-                    A_parent = A_parent.right
+        if A is self.root:
+            R.depth = 0
+            A_parent = R
+            self.root = A_parent
         else:
-            R.depth = 1
-            self.root = R
-            A_parent = self.root
-        # print("parent", A_parent.key)
+            A_parent.right = R
 
-        A.height = max(L.height if L is not None else 0, RL.height if RL is not None else 0) + 1
-        R.height = max(A.height, R.right.height) + 1
+        A.height = max(L.height if L is not None else -1, RL.height if RL is not None else -1) + 1
+        A.printNodeInfo()
+        R.height = max(A.height if A is not None else -1, RR.height if RR is not None else -1) + 1
+        R.printNodeInfo()
+        self.recalculateDepth(A_parent)
 
-        self.recalculateDepth(R)
+    def rightRotation(self, A, A_parent):
+        print("Right Rotate at", A.key)
+        pass
+
+    def leftRightRotation(self, A, A_parent):
+        print("Left Right Rotate at", A.key)
+        pass
+
+    def rightLeftRotation(self, A, A_parent):
+        print("Right Left Rotate at", A.key)
+        pass
 
     def recalculateDepth(self, R):
         parent_depth = R.depth
@@ -156,7 +179,7 @@ class AVLTree:
         tree_height = self.root.height
         node_list = [[] for _ in range(tree_height + 1)]
         branch_list = [[] for _ in range(tree_height + 2)]
-        node_list[1] = [str(self.root.key)]
+        node_list[0] = [str(self.root.key)]
         done = []
         queue = deque([self.root])
         while queue:
@@ -182,13 +205,13 @@ class AVLTree:
                 node_list[next_depth].append(' ')
                 branch_list[next_depth].append('')
             done.append(crr)
-        node_list = node_list[1:]
         branch_list = branch_list[1:]
-        for i in range(len(node_list)-1):
+        for i in range(len(node_list)):
             # n = tree_height - i
             for j in range(len(node_list[i])):
                 print(node_list[i][j], end='  ' if node_list[i][j] != ' ' else '')
-            print("\n", ' '.join(branch_list[i+1]))
+            print("\n", ' '.join(branch_list[i]))
+        print(node_list)
 
 
 def main():
@@ -202,10 +225,17 @@ def main():
     test_tree.insert(6)
     test_tree.insert(7)
     test_tree.printTree()
-#    test_node = test_tree.root.right.right.right
-#    print(test_node.key)
-#    print(test_node.height)
-#    print(test_tree.root.balance())
+    '''
+                    8
+                /        \
+               4         10
+             /   \      /   \
+            3     6    9    11
+                /   \
+                5    7
+    '''
+    test_node = test_tree.root
+    test_node.printNodeInfo()
 
 
 if __name__ == "__main__":
