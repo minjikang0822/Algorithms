@@ -42,7 +42,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🔴[Red-Black Tree](https://github.com/minjikang0822/Algorithms/blob/main/036_RedBlackTree.py)
 </br>
-🟡[AVL Tree](https://github.com/minjikang0822/Algorithms/blob/main/037_AVLTree.py)
+🟢[AVL Tree](https://github.com/minjikang0822/Algorithms/blob/main/037_AVLTree.py)
 </br>
 🔴[B Tree](https://github.com/minjikang0822/Algorithms/blob/main/038_BTree.py)
 </br>
