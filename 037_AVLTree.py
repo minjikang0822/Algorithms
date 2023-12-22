@@ -43,22 +43,41 @@ class AVLTree:
                     break
                 crr = crr.right
         print("---------", newVal, "inserted ---------")
-        self.printTree()
         self.recalculateHeight(newNode)
+        self.printTree()
         A, A_parent = self.unbalanced_A(crr)
+
         # RIGHT HEAVY => Left Rotation OR Right-Left Rotation
         if A.balance() < -1:
-            L = A.left
             R = A.right
             subLeft_height = R.left.height if R.left is not None else -1
             subRight_height = R.right.height if R.right is not None else -1
+
             # CASE #1: LEFT ROTATION
-            # ***RIGHT HEAVY*** + NEW NODE INSERTED TO RIGHT SUBTREE
+            # ***RIGHT HEAVY*** + NEW NODE INSERTED TO RR
             if subLeft_height < subRight_height:
                 self.leftRotation(A, A_parent)
-            # ***RIGHT HEAVY*** + NEW NODE INSERTED LEFT SUBTREE HEAVY
+
+            # CASE #2: LEFT RIGHT ROTATION
+            # ***RIGHT HEAVY*** + NEW NODE INSERTED TO RL
             else:
                 self.leftRightRotation(A, A_parent)
+
+        # LEFT HEAVY => Right Rotation OR Left-Right Rotation
+        elif A.balance() > 1:
+            L = A.left
+            subLeft_height = L.left.height if L.left is not None else -1
+            subRight_height = L.right.height if L.right is not None else -1
+
+            # CASE #3: RIGHT ROTATION
+            # ***LEFT HEAVY*** + NEW NODE INSERTED TO LL
+            if subLeft_height > subRight_height:
+                self.rightRotation(A, A_parent)
+
+            # CASE #4: RIGHT LEFT ROTATION
+            # ***LEFT HEAVY*** + NEW NODE INSERTED TO LR
+            else:
+                self.rightLeftRotation(A, A_parent)
 
     def unbalanced_A(self, target):
         target_key = target.key
@@ -123,6 +142,26 @@ class AVLTree:
                |
            *NEW NODE*
         """
+        L = A.left
+        LL = L.left
+        LR = L.right
+        R = A.right
+
+        L.right = A
+        A.left = LR
+
+        if A is self.root:
+            L.depth = 0
+            A_parent = L
+            self.root = L
+        else:
+            A_parent.left = L
+
+        A.height = max(LR.height if LR is not None else -1, R.height if R is not None else -1) + 1
+        L.height = max(LL.height if LL is not None else -1, A.height if A is not None else -1) + 1
+        self.recalculateHeight(L)
+        self.recalculateDepth(A_parent)
+
         print("----- Right Rotation at", A.key, "-----")
         self.printTree()
 
@@ -137,7 +176,9 @@ class AVLTree:
                LL   LR                L                        LL   *NEW NODE*   R
                     /              /     \
                *NEW NODE*         LL   *NEW NODE*
+        """
 
+        """
             B)
                       A                        A                         LR
                    /     \      LEFT       /       \      RIGHT      /        \
@@ -151,6 +192,27 @@ class AVLTree:
         self.printTree()
 
     def rightLeftRotation(self, A, A_parent):
+        """
+            CASE #4: RIGHT LEFT ROTATION
+            A)
+                      A                        A                         RL
+                   /     \      RIGHT      /       \       LEFT      /        \
+                  L       R      ==>      L        RL      ==>      A          R
+                        /   \                   /      \          /   \         \
+                       RL   RR            *NEW NODE*    R        L  *NEW NODE*  RR
+                      /                                  \
+                     *NEW NODE*                          RR
+    """
+    """
+            B)
+                      A                        A                         RL
+                   /     \      RIGHT      /       \       LEFT      /        \
+                  L       R      ==>      L        RL      ==>      A          R
+                        /   \                       \              /        /      \
+                       RL   RR                       R            L    *NEW NODE*   RR
+                        \                        /       \
+                    *NEW NODE*              *NEW NODE*   RR
+                """
         print("----- Right Left Rotation at", A.key, "-----")
         self.printTree()
 
@@ -193,8 +255,10 @@ class AVLTree:
             if crr in done:
                 continue
             next_depth = crr.depth + 1
+
             if next_depth > tree_height:
                 continue
+
             if crr.left is not None:
                 queue.append(crr.left)
                 node_list[next_depth].append(str(crr.left.key))
@@ -217,22 +281,24 @@ class AVLTree:
             for j in range(len(node_list[i])):
                 print(node_list[i][j], end='  ' if node_list[i][j] != ' ' else '')
             if i == len(branch_list) - 1:
-                break
+                continue
             print("\n", ' '.join(branch_list[i]))
         print("\n------------------------------")
 
 
 def main():
-    test_tree = AVLTree(3)
-    test_tree.insert(4)
-    test_tree.insert(5)
-    test_tree.insert(8)
-    test_tree.insert(9)
-    test_tree.insert(10)
-    test_tree.insert(11)
-    test_tree.insert(6)
-    test_tree.insert(7)
-    test_tree.printTree()
+    """
+    print("EX1) EXAMPLE FOR LEFT ROTATION")
+    ex01 = AVLTree(3)
+    ex01.insert(4)
+    ex01.insert(5)
+    ex01.insert(8)
+    ex01.insert(9)
+    ex01.insert(10)
+    ex01.insert(11)
+    ex01.insert(6)
+    ex01.insert(7)
+    ex01.printTree()
     '''
                     8
                 /        \
@@ -242,7 +308,20 @@ def main():
                 /   \
                 5    7
     '''
-    test_node = test_tree.root.right.right
+    """
+
+    """
+    print("EX2) EXAMPLE FOR RIGHT ROTATION")
+    ex02 = AVLTree(30)
+    new_nodes = [10, 40, 5, 20, 35, 45, 3, 7, 15, 25, 30, 37, 42, 47, 2, 4, 6, 8, 1]
+    for node in new_nodes:
+        ex02.insert(node)
+    """
+
+    print("EX3) EXAMPLE FOR RIGHT LEFT ROTATION")
+    ex03 = AVLTree(50)
+
+    test_node = ex03.root
     test_node.printNodeInfo()
 
 
