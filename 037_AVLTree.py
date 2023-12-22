@@ -83,7 +83,13 @@ class AVLTree:
             # CASE #4: LEFT RIGHT ROTATION
             # ***LEFT HEAVY*** + NEW NODE INSERTED TO LR
             else:
-                self.leftRightRotation(A, A_parent)
+                # CASE #4-A: NEW NODE added as a LEFT CHILD of LR
+                if crr.right is None:
+                    self.leftRightRotation_A(A, A_parent)
+
+                # CASE #4-B: NEW NODE added as a RIGHT CHILD of LR
+                else:
+                    self.leftRightRotation_B(A, A_parent)
 
     def unbalanced_A(self, target):
         target_key = target.key
@@ -171,13 +177,14 @@ class AVLTree:
 
         A.height = max(LR.height if LR is not None else -1, R.height if R is not None else -1) + 1
         L.height = max(LL.height if LL is not None else -1, A.height if A is not None else -1) + 1
+
         self.recalculateHeight(L)
         self.recalculateDepth(A_parent)
 
         print("----- Right Rotation at", A.key, "-----")
         self.printTree()
 
-    def leftRightRotation(self, A, A_parent):
+    def leftRightRotation_A(self, A, A_parent):
         """
             CASE #2: LEFT RIGHT ROTATION
             A)
@@ -190,6 +197,42 @@ class AVLTree:
                *NEW NODE*         LL   *NEW NODE*
         """
 
+        L = A.left
+        R = A.right
+        LL = L.left
+        LR = L.right
+        NEW_NODE = LR.left
+
+        # STEP01: LEFT ROTATION
+        L.right = NEW_NODE
+        LR.left = L
+        A.left = LR
+
+        # STEP02: RIGHT ROTATION
+        A.left = None
+        LR.right = A
+
+        if A is self.root:
+            LR.depth = 0
+            A_parent = LR
+            self.root = LR
+        else:
+            if A_parent.balance() > 1:
+                A_parent.left = LR
+            else:
+                A_parent.right = LR
+
+        L.height = max(LL.height if LL is not None else -1, NEW_NODE.height) + 1
+        A.height = (R.height if R is not None else -1) + 1
+        LR.height = max(L.height if L is not None else -1, A.height if A is not None else -1) + 1
+
+        self.recalculateHeight(LR)
+        self.recalculateDepth(A_parent)
+
+        print("Left Right Rotate (A) at", A.key)
+        self.printTree()
+
+    def leftRightRotation_B(self, A, A_parent):
         """
             B)
                       A                        A                         LR
@@ -200,7 +243,40 @@ class AVLTree:
                       \             /
                   *NEW NODE*      LL
         """
-        print("Left Right Rotate at", A.key)
+
+        L = A.left
+        R = A.right
+        LL = L.left
+        LR = L.right
+        NEW_NODE = LR.right
+
+        # STEP01: LEFT ROTATION
+        L.right = None
+        LR.left = L
+        A.left = LR
+
+        # STEP02: RIGHT ROTATION
+        A.left = NEW_NODE
+        LR.right = A
+
+        if A is self.root:
+            LR.depth = 0
+            A_parent = LR
+            self.root = LR
+        else:
+            if A_parent.balance() > 1:
+                A_parent.left = LR
+            else:
+                A_parent.right = LR
+
+        L.height = (LL.height if LL is not None else -1) + 1
+        A.height = max(R.height if R is not None else -1, NEW_NODE.height) + 1
+        LR.height = max(L.height if L is not None else -1, A.height if A is not None else -1) + 1
+
+        self.recalculateHeight(LR)
+        self.recalculateDepth(A_parent)
+
+        print("Left Right Rotate (B) at", A.key)
         self.printTree()
 
     def rightLeftRotation_A(self, A, A_parent):
@@ -241,7 +317,7 @@ class AVLTree:
             else:
                 A_parent.right = RL
 
-        A.height = (L.height if L is not None else -1) + 1
+        A.height = max(L.height if L is not None else -1, NEW_NODE.height) + 1
         R.height = (RR.height if RR is not None else -1) + 1
         RL.height = max(A.height if A is not None else -1, R.height if R is not None else -1) + 1
 
@@ -290,7 +366,7 @@ class AVLTree:
                 A_parent.right = RL
 
         A.height = (L.height if L is not None else -1) + 1
-        R.height = (RR.height if RR is not None else -1) + 1
+        R.height = max(RR.height if RR is not None else -1, NEW_NODE.height) + 1
         RL.height = max(A.height if A is not None else -1, R.height if R is not None else -1) + 1
 
         self.recalculateHeight(RL)
@@ -405,7 +481,7 @@ def main():
 
     print("EX4) EXAMPLE FOR LEFT RIGHT ROTATION")
     ex04 = AVLTree(50)
-    new_nodes04 = [20, 80, 10, 40, 30]
+    new_nodes04 = [20, 80, 10, 40, 30, 45, 5, 15, 17]
     for node in new_nodes04:
         ex04.insert(node)
 
