@@ -404,6 +404,21 @@ class AVLTree:
         subRootParent.height = max(leftHeight, rightHeight) + 1
         self.recalculateHeight(subRootParent)
 
+    def search(self, target):
+        crr = self.root
+        while True:
+            if crr is None:
+                print(target, "does NOT exist in the AVL Tree")
+                return None
+
+            if crr.key > target:
+                crr = crr.left
+            elif crr.key < target:
+                crr = crr.right
+            else:
+                print(target, "found")
+                return crr
+
     def printTree(self):
         tree_height = self.root.height
         node_list = [[] for _ in range(tree_height + 1)]
@@ -497,6 +512,8 @@ def main():
     '''
     test_node = ex04.root
     test_node.printNodeInfo()
+    ex04.search(1)
+    ex04.search(20)
 
 
 if __name__ == "__main__":
