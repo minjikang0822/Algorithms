@@ -40,7 +40,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Kruskal's Algorithms](https://github.com/minjikang0822/Algorithms/blob/main/019_Kruskals.py)
 </br>
-🔴[Red-Black Tree](https://github.com/minjikang0822/Algorithms/blob/main/036_RedBlackTree.py)
+🟡[Red-Black Tree](https://github.com/minjikang0822/Algorithms/blob/main/036_RedBlackTree.py)
 </br>
 🟢[AVL Tree](https://github.com/minjikang0822/Algorithms/blob/main/037_AVLTree.py)
 </br>
