@@ -406,18 +406,80 @@ class AVLTree:
 
     def search(self, target):
         crr = self.root
-        while True:
-            if crr is None:
-                print(target, "does NOT exist in the AVL Tree")
-                return None
-
+        crr_parent = self.root
+        while crr.key != target:
+            crr_parent = crr
             if crr.key > target:
                 crr = crr.left
-            elif crr.key < target:
-                crr = crr.right
             else:
-                print(target, "found")
-                return crr
+                crr = crr.right
+
+            if crr is None:
+                print(target, "does NOT exist in the AVL Tree")
+                return None, None
+        print(target, "found")
+        return crr, crr_parent
+
+    def delete(self, target):
+        to_delete, toDelete_parent = self.search(target)
+        successor, successor_parent = self.findInOrderSuccessor(to_delete)
+        if to_delete is None:
+            print("Since", target, "does not exist, it CANNOT be deleted")
+            return
+        elif to_delete is self.root:
+            # there is no node than just root node
+            if successor is None:
+                self.root = None
+                return
+            else:
+                if successor_parent.left is successor:
+                    successor_parent.left = None
+                elif successor_parent.right is successor:
+                    successor_parent.right = None
+                self.root.key = successor.key
+        else:
+            if successor_parent.left is successor:
+                successor_parent.left = None
+            elif successor_parent.right is successor:
+                successor_parent.right = None
+
+            # CASE 1: Successor does not have any child
+            if successor.left is None and successor.right is None:
+                if toDelete_parent.left is to_delete:
+                    toDelete_parent.left.key = successor
+                else:
+                    toDelete_parent.right.key = successor
+            # CASE 2: Successor has both left and right child
+            elif successor.left is not None and successor.right is not None:
+                # to do
+                pass
+            # CASE 3: Successor has only left child
+            elif successor.left is not None:
+                pass
+            # CASE 4: Successor has only right child
+            else:
+                pass
+        successor_parent.height = max(successor_parent.left.height if successor_parent.left is not None else -1,
+                                      successor_parent.right.height if successor_parent.right is not None else -1) + 1
+        self.recalculateHeight(successor_parent)
+        self.recalculateDepth(self.root)
+        print(target, "DELETED")
+        self.printTree()
+
+    def findInOrderSuccessor(self, target):
+        parent = target
+        crr = target.left
+        if crr is not None:
+            while crr.right is not None:
+                parent = crr
+                crr = crr.right
+        else:
+            crr = target.right
+            if crr is not None:
+                while crr.left is not None:
+                    parent = crr
+                    crr = crr.left
+        return crr, parent
 
     def printTree(self):
         tree_height = self.root.height
@@ -510,10 +572,15 @@ def main():
               /    / \ 
              70  95  120
     '''
-    test_node = ex04.root
-    test_node.printNodeInfo()
     ex04.search(1)
     ex04.search(20)
+    ex04.delete(60)
+    ex04.delete(100)
+    ex04.delete(90)
+    ex04.search(60)
+
+    test_node = ex04.root
+    test_node.printNodeInfo()
 
 
 if __name__ == "__main__":
