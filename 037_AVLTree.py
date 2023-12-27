@@ -394,6 +394,8 @@ class AVLTree:
         subRootKey = subRoot.key
         while crr is not subRoot:
             subRootParent = crr
+            print("subRootKey", subRootKey)
+            print("crr.key", crr.key)
             if crr.key > subRootKey:
                 crr = crr.left
             else:
@@ -423,6 +425,7 @@ class AVLTree:
     def delete(self, target):
         to_delete, toDelete_parent = self.search(target)
         successor, successor_parent = self.findInOrderSuccessor(to_delete)
+        print("test01", successor_parent.key)
         if to_delete is None:
             print("Since", target, "does not exist, it CANNOT be deleted")
             return
@@ -438,35 +441,40 @@ class AVLTree:
                     successor_parent.right = None
                 self.root.key = successor.key
         else:
+            print("test02", successor_parent.key)
             if successor_parent.left is successor:
                 successor_parent.left = None
             elif successor_parent.right is successor:
                 successor_parent.right = None
-
-            # CASE 1: Successor does not have any child
+            print("test02.5", successor_parent)
+            # CASE 1: The node to delete does not have any child
             if successor.left is None and successor.right is None:
                 if toDelete_parent.left is to_delete:
                     toDelete_parent.left.key = successor
                 else:
                     toDelete_parent.right.key = successor
-            # CASE 2: Successor has both left and right child
+                print("test03", successor_parent.key)
+            # CASE 2: The node to delete has both left and right child
             elif successor.left is not None and successor.right is not None:
                 # to do
                 pass
-            # CASE 3: Successor has only left child
+            # CASE 3: The node to delete has only left child
             elif successor.left is not None:
                 pass
-            # CASE 4: Successor has only right child
+            # CASE 4: The node to delete has only right child
             else:
                 pass
+        print("test04", successor_parent.key)
         successor_parent.height = max(successor_parent.left.height if successor_parent.left is not None else -1,
                                       successor_parent.right.height if successor_parent.right is not None else -1) + 1
+        print("parent", successor_parent.key)
         self.recalculateHeight(successor_parent)
         self.recalculateDepth(self.root)
         print(target, "DELETED")
         self.printTree()
 
     def findInOrderSuccessor(self, target):
+        to_delete, to_delete_parent = self.search(target)
         parent = target
         crr = target.left
         if crr is not None:
