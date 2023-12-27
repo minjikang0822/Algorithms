@@ -394,8 +394,6 @@ class AVLTree:
         subRootKey = subRoot.key
         while crr is not subRoot:
             subRootParent = crr
-            print("subRootKey", subRootKey)
-            print("crr.key", crr.key)
             if crr.key > subRootKey:
                 crr = crr.left
             else:
@@ -423,15 +421,14 @@ class AVLTree:
         return crr, crr_parent
 
     def delete(self, target):
-        to_delete, toDelete_parent = self.search(target)
-        successor, successor_parent = self.findInOrderSuccessor(to_delete)
-        print("test01", successor_parent.key)
+        to_delete, toDelete_parent, successor, successor_parent = self.findInOrderSuccessor(target)
+
         if to_delete is None:
             print("Since", target, "does not exist, it CANNOT be deleted")
             return
         elif to_delete is self.root:
             # there is no node than just root node
-            if successor is None:
+            if successor is self.root:
                 self.root = None
                 return
             else:
@@ -441,53 +438,39 @@ class AVLTree:
                     successor_parent.right = None
                 self.root.key = successor.key
         else:
-            print("test02", successor_parent.key)
+            new_child = successor.left if successor.left is not None else successor.right
             if successor_parent.left is successor:
-                successor_parent.left = None
+                successor_parent.left = new_child
             elif successor_parent.right is successor:
-                successor_parent.right = None
-            print("test02.5", successor_parent)
-            # CASE 1: The node to delete does not have any child
-            if successor.left is None and successor.right is None:
-                if toDelete_parent.left is to_delete:
-                    toDelete_parent.left.key = successor
-                else:
-                    toDelete_parent.right.key = successor
-                print("test03", successor_parent.key)
-            # CASE 2: The node to delete has both left and right child
-            elif successor.left is not None and successor.right is not None:
-                # to do
-                pass
-            # CASE 3: The node to delete has only left child
-            elif successor.left is not None:
-                pass
-            # CASE 4: The node to delete has only right child
-            else:
-                pass
-        print("test04", successor_parent.key)
+                successor_parent.right = new_child
+
+            to_delete.key = successor.key
+
         successor_parent.height = max(successor_parent.left.height if successor_parent.left is not None else -1,
                                       successor_parent.right.height if successor_parent.right is not None else -1) + 1
-        print("parent", successor_parent.key)
         self.recalculateHeight(successor_parent)
         self.recalculateDepth(self.root)
+
+        # balance the tree again
+
         print(target, "DELETED")
         self.printTree()
 
     def findInOrderSuccessor(self, target):
         to_delete, to_delete_parent = self.search(target)
-        parent = target
-        crr = target.left
-        if crr is not None:
-            while crr.right is not None:
-                parent = crr
-                crr = crr.right
+        successor_parent = to_delete
+        successor = successor_parent.left
+        if successor is not None:
+            while successor.right is not None:
+                successor_parent = successor
+                successor = successor.right
         else:
-            crr = target.right
-            if crr is not None:
-                while crr.left is not None:
-                    parent = crr
-                    crr = crr.left
-        return crr, parent
+            successor = successor_parent.right
+            if successor is not None:
+                while successor.left is not None:
+                    successor_parent = successor
+                    successor = successor.left
+        return to_delete, to_delete_parent, successor, successor_parent
 
     def printTree(self):
         tree_height = self.root.height
