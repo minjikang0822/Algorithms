@@ -426,17 +426,12 @@ class AVLTree:
         if to_delete is None:
             print("Since", target, "does not exist, it CANNOT be deleted")
             return
-        elif to_delete is self.root:
-            # there is no node than just root node
-            if successor is self.root:
-                self.root = None
-                return
-            else:
-                if successor_parent.left is successor:
-                    successor_parent.left = None
-                elif successor_parent.right is successor:
-                    successor_parent.right = None
-                self.root.key = successor.key
+
+        # there is no node than just root node
+        elif to_delete is self.root and successor is self.root:
+            self.root = None
+            return
+
         else:
             new_child = successor.left if successor.left is not None else successor.right
             if successor_parent.left is successor:
@@ -452,6 +447,31 @@ class AVLTree:
         self.recalculateDepth(self.root)
 
         # balance the tree again
+        A, A_parent = self.unbalanced_A(toDelete_parent)
+        print("A:", A.balance())
+        # check if Left Heavy OR Right Heavy
+        # LEFT HEAVY
+        if A.balance() > 1:
+            L = A.left
+            if L.balance() > 0:
+                self.rightRotation(A, A_parent)
+            else:
+                LR = L.right
+                if LR.right is None:
+                    self.leftRightRotation_A(A, A_parent)
+                elif LR.left is None:
+                    self.leftRightRotation_B(A, A_parent)
+        # RIGHT HEAVY
+        elif A.balance() < -1:
+            R = A.right
+            if R.balance() > 0:
+                RL = R.left
+                if RL.left is None:
+                    self.rightLeftRotation_A(A, A_parent)
+                elif RL.right is None:
+                    self.rightLeftRotation_B(A, A_parent)
+            else:
+                self.leftRotation(A, A_parent)
 
         print(target, "DELETED")
         self.printTree()
@@ -568,6 +588,8 @@ def main():
     ex04.delete(60)
     ex04.delete(100)
     ex04.delete(90)
+    ex04.delete(55)
+    ex04.delete(80)
     ex04.search(60)
 
     test_node = ex04.root
