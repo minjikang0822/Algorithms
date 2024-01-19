@@ -120,5 +120,5 @@ Implemented Useful Algorithms in Python for Competitive Programming
 
 
 ## Finding Prime Number
-🟢 [Sieve of Eratosthenes](https://github.com/minjikang0822/Algorithms/blob/main/043_SieveOfEratosthenes.py)
+🟢 [Sieve of Eratosthenes](https://github.com/minjikang0822/Algorithms/blob/main/43_SieveOfEratosthenes.py)
 
