@@ -14,7 +14,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 4. [Searching Algorithm](#Searching-Algorithm)
 5. [Algorithm for Finding The Shortest Paths](#Algorithm-for-Finding-The-Shortest-Paths)
 6. [Greedy Algorithm](#Greedy-Algorithm)
-
+7. [Finding Prime Number](#Finding-Prime-Number)
 
 
 ## Data Structure
