@@ -97,7 +97,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🔴[Exponential Search]()
 </br>
-🟡[Fibonacci Search]()
+🟢[Fibonacci Search]()
 </br>
 🔴[The Ubiquitous Binary Search]()
 
