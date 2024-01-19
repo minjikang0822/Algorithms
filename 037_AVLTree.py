@@ -371,6 +371,10 @@ class AVLTree:
         R.height = max(RR.height if RR is not None else -1, NEW_NODE.height) + 1
         RL.height = max(A.height if A is not None else -1, R.height if R is not None else -1) + 1
 
+        """if RL is not None:
+            self.recalculateHeight(RL)
+        else:
+            self.recalculateHeight(R)"""
         self.recalculateHeight(RL)
         self.recalculateDepth(A_parent)
 
@@ -392,7 +396,7 @@ class AVLTree:
         crr = self.root
         subRootParent = crr
         subRootKey = subRoot.key
-        while crr is not subRoot:
+        while crr is not subRoot and crr is not None:
             subRootParent = crr
             if crr.key > subRootKey:
                 crr = crr.left
@@ -432,6 +436,12 @@ class AVLTree:
             self.root = None
             return
 
+        elif successor_parent is to_delete and successor is None:
+            if toDelete_parent.left is to_delete:
+                toDelete_parent.left = None
+            else:
+                toDelete_parent.right = None
+
         else:
             new_child = successor.left if successor.left is not None else successor.right
             if successor_parent.left is successor:
@@ -443,7 +453,10 @@ class AVLTree:
 
         successor_parent.height = max(successor_parent.left.height if successor_parent.left is not None else -1,
                                       successor_parent.right.height if successor_parent.right is not None else -1) + 1
-        self.recalculateHeight(successor_parent)
+        if successor_parent is not None:
+            self.recalculateHeight(successor_parent)
+        else:
+            self.recalculateHeight(toDelete_parent)
         self.recalculateDepth(self.root)
 
         # balance the tree again
@@ -591,6 +604,9 @@ def main():
     ex04.delete(55)
     ex04.delete(80)
     ex04.search(60)
+    ex04.delete(95)
+    ex04.delete(120)
+    ex04.delete(50)
 
     test_node = ex04.root
     test_node.printNodeInfo()
