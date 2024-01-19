@@ -15,6 +15,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 5. [Algorithm for Finding The Shortest Paths](#Algorithm-for-Finding-The-Shortest-Paths)
 6. [Greedy Algorithm](#Greedy-Algorithm)
 7. [Finding Prime Number](#Finding-Prime-Number)
+8. [Finding Greatest Common Divisor](#Finding-Greatest-Common-Divisor)
 
 
 ## Data Structure
@@ -121,4 +122,9 @@ Implemented Useful Algorithms in Python for Competitive Programming
 
 ## Finding Prime Number
 🟢 [Sieve of Eratosthenes](https://github.com/minjikang0822/Algorithms/blob/main/43_SieveOfEratosthenes.py)
+
+
+
+## Finding Greatest Common Divisor
+🟢 [EuclideanAlgorithm](https://github.com/minjikang0822/Algorithms/blob/main/44_EuclideanAlgorithm.py)
 
