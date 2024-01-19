@@ -117,3 +117,8 @@ Implemented Useful Algorithms in Python for Competitive Programming
 <br>
 🔴[Prim's Algorithm](https://github.com/minjikang0822/Algorithms/blob/main/041_Prims.py)
 
+
+
+## Finding Prime Number
+🟢 [Sieve of Eratosthenes](https://github.com/minjikang0822/Algorithms/blob/main/043_SieveOfEratosthenes.py)
+
