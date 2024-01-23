@@ -2,10 +2,10 @@ def fibonacciSearch(arr):
     n = len(arr)
 
 
-def fibonnaciNumber(n):
+def fibonacciNumber(n):
     if n <= 2:
         return 1
-    return fibonnaciNumber(n-2) + fibonnaciNumber(n-1)
+    return fibonacciNumber(n-2) + fibonacciNumber(n-1)
 
 
 def main():
