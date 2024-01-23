@@ -1,3 +1,6 @@
+def fibonacciSearch(arr):
+    n = len(arr)
+
 def main():
     pass
 
