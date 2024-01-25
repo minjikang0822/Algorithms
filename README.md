@@ -84,7 +84,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 ## Searching Algorithm
 🟢[Linear Search](https://github.com/minjikang0822/Algorithms/blob/main/026_LinearSearch.py)
 </br>
-🔴[Binary Search]()
+🟢[Binary Search](https://github.com/minjikang0822/Algorithms/blob/main/029_BinarySearch.py)
 </br>
 🟢[Depth-First Search (DFS)](https://github.com/minjikang0822/Algorithms/blob/main/013_DepthFirstSearch(DFS).py)
 </br>
