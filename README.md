@@ -92,7 +92,7 @@ Implemented Useful Algorithms in Python for Competitive Programming
 </br>
 🟢[Ternary Search](https://github.com/minjikang0822/Algorithms/blob/main/030_TernarySearch.py)
 </br>
-🔴[Jump Search]()
+🟡[Jump Search](https://github.com/minjikang0822/Algorithms/blob/main/031_JumpSearch.py)
 </br>
 🔴[Interpolation Search]()
 </br>
