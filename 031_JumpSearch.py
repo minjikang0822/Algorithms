@@ -1,3 +1,7 @@
+def jumpSearch(arr):
+    pass
+
+
 def main():
     pass
 
