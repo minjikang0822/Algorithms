@@ -3,23 +3,19 @@ import math
 
 def jumpSearch(arr, to_find):
     n = len(arr)
-    print("n:", n)
     # size of block
     m = int(math.sqrt(n))
 
     k = 0
-    while k * m < n:
-        idx = k * m
-        next_idx = min((k + 1) * m, n - 1)
-
-        if arr[idx] == to_find:
-            return idx
-        elif arr[next_idx] > to_find:
-            while idx < next_idx:
-                if arr[idx] == to_find:
-                    return idx
-                idx += 1
+    while k * m < n and arr[k * m] <= to_find:
         k += 1
+
+    idx = (k-1) * m
+    for crr in range(m):
+        crr_idx = min(idx + crr, n-1)
+        if arr[crr_idx] == to_find:
+            return crr_idx
+
     return -1
 
 
@@ -41,7 +37,7 @@ def main():
     # 9
 
     print(jumpSearch(test_arr, -8))
-    # 9
+    # 1
 
 
 if __name__ == "__main__":
