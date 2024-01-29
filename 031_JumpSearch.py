@@ -4,15 +4,15 @@ import math
 def jumpSearch(arr, to_find):
     n = len(arr)
     block = int(math.sqrt(n))
-    print(block)
-    i = 0
-    while arr[block * i] < to_find:
-        i += 1
-        if block * i > n:
+
+    k = 0
+    while arr[block * (k+1)] < to_find:
+        k += 1
+        if block * (k+1) > n:
             return -1
 
-    idx = i
-    while idx < block * (i + 1) < n:
+    idx = k
+    while idx < block * (k + 1) < n:
         if arr[idx] == to_find:
             return idx
         idx += 1
