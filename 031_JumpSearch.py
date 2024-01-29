@@ -28,6 +28,12 @@ def main():
     print(jumpSearch(test_arr, -6))
     # -1
 
+    print(jumpSearch(test_arr, -12))
+    # 0
+
+    print(jumpSearch(test_arr, 11))
+    print(jumpSearch(test_arr, 10))
+
 
 if __name__ == "__main__":
     main()
