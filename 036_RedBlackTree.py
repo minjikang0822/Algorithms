@@ -2,7 +2,10 @@ class RedBlackTree:
     def __init__(self, root):
         self.root = root
 
-    def insert(self, node):
+    def insert(self, value):
+        pass
+
+    def delete(self, value):
         pass
 
 
