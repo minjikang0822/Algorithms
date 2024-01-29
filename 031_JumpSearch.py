@@ -23,6 +23,10 @@ def jumpSearch(arr, to_find):
 def main():
     test_arr = [-12, -8, -4, -3, -1, 0, 5, 6, 7, 10, 11]
     print(jumpSearch(test_arr, 6))
+    # 7
+
+    print(jumpSearch(test_arr, -6))
+    # -1
 
 
 if __name__ == "__main__":
