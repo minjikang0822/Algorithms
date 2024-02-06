@@ -1,3 +1,11 @@
+"""
+git add .
+git commit -m “updated”
+git push origin main
+
+"""
+
+
 class RedBlackTree:
     def __init__(self, root):
         self.root = root
