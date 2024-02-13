@@ -4,6 +4,7 @@ import heapq
 def min_heapsort(iterable):
     h = []
     result = []
+    # insert value to h
     for value in iterable:
         heapq.heappush(h, value)
     for i in range(len(h)):
